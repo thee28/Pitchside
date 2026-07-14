@@ -1,0 +1,661 @@
+<helmet>
+<title>Pitchside — World Cup 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<style>/* latin-ext */
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("0ae25307-3b79-4970-97b0-4ac96f4982a2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("422ab6a8-2aa5-4fd8-8e76-0a3373666936") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("a76d9051-8baf-44a5-9cc1-49df323b69a2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f2d8fb4e-4c8a-43fc-ab91-8d0b5f68f02b") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ff249e89-0ecc-4278-8899-f36533479582") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("cf7c7682-e2dd-4635-a742-697f976fcec7") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("b6dc4916-5747-44b9-9d80-b2da1643fed1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("1e815fae-67d4-4634-be75-8b6b7bbd8cce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("b6dc4916-5747-44b9-9d80-b2da1643fed1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("1e815fae-67d4-4634-be75-8b6b7bbd8cce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("b6dc4916-5747-44b9-9d80-b2da1643fed1") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("1e815fae-67d4-4634-be75-8b6b7bbd8cce") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+body{margin:0;background:#658351}
+*{box-sizing:border-box}
+::selection{background:#F5F5F0;color:#2E4228}
+@keyframes psBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+</style>
+</helmet>
+<div style="min-height:100vh;background-image:linear-gradient(90deg,#6F8C5C 0 50%,#658351 50% 100%);background-size:280px 100%;background-position:top center;background-repeat:repeat;font-family:'DM Sans',sans-serif;color:#F5F5F0">
+
+  <!-- chalk field lines -->
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.22">
+    <div style="position:absolute;left:24px;right:24px;top:52%;height:2px;transform:translateY(-50%);background:#FAFAF7"></div>
+    <div style="position:absolute;left:50%;top:52%;width:460px;height:460px;transform:translate(-50%,-50%);border:2px solid #FAFAF7;border-radius:50%"></div>
+    <div style="position:absolute;left:50%;top:52%;width:12px;height:12px;transform:translate(-50%,-50%);border-radius:50%;background:#FAFAF7"></div>
+    <div style="position:absolute;left:-50px;bottom:-50px;width:100px;height:100px;border:2px solid #FAFAF7;border-radius:50%"></div>
+    <div style="position:absolute;right:-50px;bottom:-50px;width:100px;height:100px;border:2px solid #FAFAF7;border-radius:50%"></div>
+  </div>
+
+  <!-- ============ TOP NAV ============ -->
+  <div style="position:sticky;top:0;z-index:20;background:#2E4228;border-bottom:2px solid rgba(250,250,247,0.7)">
+    <div style="max-width:1160px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;min-height:58px">
+      <button onclick="{{ goHome }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:0">
+        <img src="8f5a3423-7f5c-48f6-9d9a-c7e34fcdbd34" alt="" style="height:30px;width:auto;display:block">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:#F5F5F0">PITCHSIDE</span>
+      </button>
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="4">
+          <button onclick="{{ n.go }}" style="{{ n.style }}">{{ n.label }}</button>
+        </sc-for>
+      </div>
+      <div style="flex:1"></div>
+      <button onclick="{{ goBracket }}" style="display:flex;align-items:center;gap:8px;background:#FAFAF7;border:1.5px solid #4A6741;cursor:pointer;padding:5px 12px">
+        <span style="font-size:14px;line-height:1">🇫🇷</span>
+        <span style="font-size:11px;font-weight:700;color:#2E4228;letter-spacing:0.02em">FRA 3–1 ARG</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(46,66,40,0.62)">FT · FINAL</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Home / Final result" style="position:relative;max-width:1160px;margin:0 auto;padding:24px 24px 56px">
+
+      <!-- HERO · variant A: Floodlit -->
+      <sc-if value="{{ heroFloodlit }}" hint-placeholder-val="{{ true }}">
+        <div style="background:#FAFAF7;border:1.5px solid #4A6741;padding:28px 32px 24px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;color:#4A6741">FULL TIME</span>
+            <span style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(46,66,40,0.62)">WORLD CUP FINAL · NEW YORK NEW JERSEY STADIUM</span>
+            <span style="flex:1"></span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;color:#2E4228">Jul 19</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:clamp(20px,5vw,56px);flex-wrap:wrap;padding:26px 0 6px">
+            <button onclick="{{ goChampions }}" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0">
+              <span style="font-size:44px;line-height:1">🇫🇷</span>
+              <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;color:#2E4228">FRANCE</span>
+              <span style="font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #FAFAF7; padding: 3px 8px; background-color: #F8A828">WORLD CHAMPIONS</span>
+            </button>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,64px);line-height:1;color:#2E4228;letter-spacing:0.05em">3 – 1</div>
+            <button onclick="{{ goRunnersUp }}" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0">
+              <span style="font-size:44px;line-height:1">🇦🇷</span>
+              <span style="font-size:12px;font-weight:500;letter-spacing:0.06em;color:rgba(46,66,40,0.6)">ARGENTINA</span>
+              <span style="font-size:9px;font-weight:500;letter-spacing:0.14em;color:rgba(46,66,40,0.55)">RUNNERS-UP</span>
+            </button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:start;padding-bottom:14px">
+            <div style="display:flex;flex-direction:column;gap:3px;font-size:12px;color:rgba(46,66,40,0.62)">
+              <span>Kylian Mbappé 17′</span>
+              <span>Kylian Mbappé 68′</span>
+              <span>Michael Olise 74′</span>
+            </div>
+            <span style="font-size:12px;line-height:1;color:rgba(46,66,40,0.62)"><br></span>
+            <div style="display:flex;flex-direction:column;gap:3px;font-size:12px;color:rgba(46,66,40,0.62);text-align:right">
+              <span>Lionel Messi 45+2′ (pen)</span>
+            </div>
+          </div>
+          <sc-if value="{{ showHeroStats }}" hint-placeholder-val="{{ true }}">
+            <div style="border-top:1px solid rgba(46,66,40,0.2);padding-top:16px;display:flex;gap:32px;flex-wrap:wrap;align-items:center">
+              <div style="flex:2 1 260px;min-width:220px">
+                <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(46,66,40,0.62);margin-bottom:6px"><span>45%</span><span>POSSESSION</span><span>55%</span></div>
+                <div style="display:flex;gap:2px;height:5px">
+                  <div style="width:45%;background:#0055A4"></div>
+                  <div style="width:55%;background:#75AADB"></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:28px;flex-wrap:wrap">
+                <div><div style="font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(46,66,40,0.62);margin-bottom:2px">SHOTS</div><div style="font-family:'DM Mono',monospace;font-size:13px;color:#2E4228">15 – 13</div></div>
+                <div><div style="font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(46,66,40,0.62);margin-bottom:2px">ON TARGET</div><div style="font-family:'DM Mono',monospace;font-size:13px;color:#2E4228">7 – 4</div></div>
+                <div><div style="font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(46,66,40,0.62);margin-bottom:2px">XG</div><div style="font-family:'DM Mono',monospace;font-size:13px;color:#2E4228">2.6 – 1.2</div></div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- HERO · variant B: Broadcast -->
+      <sc-if value="{{ heroBroadcast }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#FAFAF7;border:1.5px solid #4A6741;padding:24px 32px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px">
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;color:#4A6741">FULL TIME</span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;color:#2E4228">Jul 19</span>
+            <span style="flex:1"></span>
+            <span style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(46,66,40,0.62)">World Cup Final · MetLife Stadium, East Rutherford</span>
+          </div>
+          <div style="display:flex;gap:40px;flex-wrap:wrap">
+            <div style="flex:2 1 320px;min-width:280px">
+              <div style="display:flex;align-items:center;gap:16px;padding:10px 0">
+                <span style="font-size:34px;line-height:1">🇫🇷</span>
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:0.04em;color:#2E4228">FRANCE</span>
+                <span style="font-size:9px;font-weight:700;letter-spacing:0.14em;color:#FAFAF7;background:#4A6741;padding:3px 8px">CHAMPIONS</span>
+                <span style="flex:1"></span>
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;color:#2E4228">3</span>
+              </div>
+              <div style="height:1px;background:rgba(46,66,40,0.2)"></div>
+              <div style="display:flex;align-items:center;gap:16px;padding:10px 0">
+                <span style="font-size:34px;line-height:1">🇦🇷</span>
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:0.04em;color:rgba(46,66,40,0.6)">ARGENTINA</span>
+                <span style="flex:1"></span>
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;color:rgba(46,66,40,0.5)">1</span>
+              </div>
+              <div style="font-size:12px;color:rgba(46,66,40,0.62);padding-top:8px">France: Mbappé 17′, 68′, Olise 74′ · Argentina: Messi 45+2′ (pen)</div>
+            </div>
+            <sc-if value="{{ showHeroStats }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:1 1 240px;min-width:220px;border-left:1px solid rgba(46,66,40,0.2);padding-left:32px;display:flex;flex-direction:column;gap:14px;justify-content:center">
+                <div>
+                  <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(46,66,40,0.62);margin-bottom:6px"><span>45%</span><span>POSSESSION</span><span>55%</span></div>
+                  <div style="display:flex;gap:2px;height:5px"><div style="width:45%;background:#0055A4"></div><div style="width:55%;background:#75AADB"></div></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:rgba(46,66,40,0.62)">Shots</span><span style="font-family:'DM Mono',monospace;color:#2E4228">15 – 13</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:rgba(46,66,40,0.62)">On target</span><span style="font-family:'DM Mono',monospace;color:#2E4228">7 – 4</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:rgba(46,66,40,0.62)">xG</span><span style="font-family:'DM Mono',monospace;color:#2E4228">2.6 – 1.2</span></div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- HERO · variant C: Ticker -->
+      <sc-if value="{{ heroTicker }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#FAFAF7;border:1.5px solid #4A6741;padding:14px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;color:#4A6741">FULL TIME</span>
+          <span style="display:flex;align-items:baseline;gap:10px">
+            <span style="font-size:20px">🇫🇷</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.05em;color:#2E4228">FRA 3 – 1 ARG</span>
+            <span style="font-size:20px">🇦🇷</span>
+          </span>
+          <span style="font-size:9px;font-weight:700;letter-spacing:0.14em;color:#FAFAF7;background:#4A6741;padding:3px 8px">CHAMPIONS</span>
+          <span style="font-size:12px;color:rgba(46,66,40,0.62)">Mbappé ×2, Olise · Messi</span>
+          <span style="flex:1"></span>
+          <span style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(46,66,40,0.62)">Final · East Rutherford · Jul 19</span>
+        </div>
+      </sc-if>
+
+      <!-- STANDINGS + KNOCKOUT RESULTS -->
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;align-items:stretch">
+        <div style="flex:2 1 460px;min-width:320px;display:flex;flex-direction:column;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+          <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:14px">
+            <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62)">Final group standings</div>
+            <div style="flex:1"></div>
+            <div style="display:flex;gap:2px;flex-wrap:wrap">
+              <sc-for list="{{ groupTabs }}" as="g" hint-placeholder-count="12">
+                <button onclick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr repeat(6, minmax(28px, 40px));gap:0 4px;align-items:center">
+            <div style="font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(250,250,247,0.62);padding:6px 0">TEAM</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">P</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">W</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">D</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">L</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">GD</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">PTS</div>
+          </div>
+          <sc-for list="{{ standingsRows }}" as="r" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:1fr repeat(6, minmax(28px, 40px));gap:0 4px;align-items:center;border-top:0.5px solid rgba(250,250,247,0.25)">
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 0;font-size:12px;color:#F5F5F0">
+                <span style="{{ r.dotStyle }}"></span>
+                <span style="font-size:15px;line-height:1">{{ r.flag }}</span>
+                <span style="font-weight:500">{{ r.name }}</span>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62);text-align:center">{{ r.p }}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62);text-align:center">{{ r.w }}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62);text-align:center">{{ r.d }}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62);text-align:center">{{ r.l }}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62);text-align:center">{{ r.gd }}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:#FAFAF7;text-align:center">{{ r.pts }}</div>
+            </div>
+          </sc-for>
+          <div style="margin-top:22px;padding-top:16px;border-top:0.5px solid rgba(250,250,247,0.25)">
+            <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62)">Knockout run</div>
+            <sc-for list="{{ knockoutRuns }}" as="k" hint-placeholder-count="2">
+              <div style="display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:0.5px solid rgba(250,250,247,0.15)">
+                <span style="font-size:15px;line-height:1">{{ k.flag }}</span>
+                <span style="font-size:13px;font-weight:500;color:#F5F5F0">{{ k.name }}</span>
+                <span style="flex:1;border-bottom:1px dotted rgba(250,250,247,0.3);margin:0 4px"></span>
+                <span style="{{ k.fateStyle }}">{{ k.fate }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:auto;padding-top:16px;font-size:10px;color:rgba(250,250,247,0.62)">
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:4px;height:4px;border-radius:50%;background:#F5F5F0"></span>Advanced</span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:4px;height:4px;border-radius:50%;background:rgba(250,250,247,0.55)"></span>Best third</span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:4px;height:4px;border-radius:50%;background:rgba(28,26,22,0.4)"></span>Eliminated</span>
+          </div>
+        </div>
+
+        <div style="flex:1 1 300px;min-width:280px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:6px">Knockout results</div>
+          <sc-for list="{{ koResults }}" as="u" hint-placeholder-count="8">
+            <div style="display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:0.5px solid rgba(250,250,247,0.25)">
+              <span style="font-size:15px;line-height:1">{{ u.fa }}</span>
+              <span style="font-size:13px;font-weight:500;color:#F5F5F0">{{ u.teams }}</span>
+              <span style="font-size:15px;line-height:1">{{ u.fb }}</span>
+              <span style="font-size:10px;font-weight:500;letter-spacing:0.04em;color:#F5F5F0;background:rgba(250,250,247,0.16);padding:2px 6px">{{ u.stage }}</span>
+              <span style="flex:1"></span>
+              <span style="font-size:11px;color:rgba(250,250,247,0.62);text-align:right">{{ u.when }}</span>
+            </div>
+          </sc-for>
+          <button onclick="{{ goBracket }}" style="margin-top:14px;background:none;border:none;cursor:pointer;padding:0;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#F5F5F0">View full bracket →</button>
+        </div>
+      </div>
+
+      <!-- TOURNAMENT STATS -->
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:20px">
+        <sc-for list="{{ tourStats }}" as="t" hint-placeholder-count="3">
+          <div style="flex:1 1 200px;min-width:180px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:18px 22px">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;color:#F5F5F0">{{ t.value }}</div>
+            <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-top:6px">{{ t.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ TEAMS INDEX ============ -->
+  <sc-if value="{{ isTeams }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Teams index" style="position:relative;max-width:1160px;margin:0 auto;padding:28px 24px 56px">
+      <div style="font-size:20px;font-weight:500;color:#FAFAF7">Teams</div>
+      <div style="font-size:13px;color:rgba(250,250,247,0.62);margin:4px 0 22px">Scout reports on how the contenders played.</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:16px">
+        <sc-for list="{{ teamCards }}" as="c" hint-placeholder-count="8">
+          <button onclick="{{ c.open }}" style="{{ c.style }}" style-hover="{{ c.hoverStyle }}">
+            <span style="font-size:34px;line-height:1">{{ c.flag }}</span>
+            <span style="{{ c.nameStyle }}">{{ c.name }}</span>
+            <span style="{{ c.subStyle }}">{{ c.sub }}</span>
+            <span style="{{ c.tagStyle }}">{{ c.tag }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ TEAM PROFILE ============ -->
+  <sc-if value="{{ isTeam }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Team profile" style="position:relative">
+      <div style="{{ teamHeroStyle }}">
+        <div style="max-width:1160px;margin:0 auto;padding:20px 24px 26px">
+          <button onclick="{{ goTeams }}" style="{{ teamHeroBackStyle }}">← All teams</button>
+          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:14px">
+            <span style="font-size:48px;line-height:1">{{ team.flag }}</span>
+            <div>
+              <div style="{{ teamHeroNameStyle }}">{{ team.name }}</div>
+              <div style="{{ teamHeroSubStyle }}">{{ team.sub }}</div>
+            </div>
+            <div style="flex:1"></div>
+            <div style="text-align:right">
+              <div style="{{ teamHeroLabelStyle }}">FINAL PLACING</div>
+              <div style="{{ teamHeroStatusStyle }}">{{ team.status }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1160px;margin:0 auto;padding:22px 24px 56px">
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch">
+          <div style="flex:1 1 340px;min-width:300px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+            <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62)">Playing style</div>
+            <div style="display:flex;flex-direction:column;gap:16px;align-items:center;margin-top:8px">
+              <div style="position:relative;flex:0 0 auto;width:260px;max-width:100%;padding:22px 44px">
+                <svg viewBox="24 24 192 192" style="width:100%;display:block">
+                  <polygon points="{{ radarRing3 }}" fill="none" stroke="rgba(250,250,247,0.35)" stroke-width="0.75"></polygon>
+                  <polygon points="{{ radarRing2 }}" fill="none" stroke="rgba(250,250,247,0.35)" stroke-width="0.5"></polygon>
+                  <polygon points="{{ radarRing1 }}" fill="none" stroke="rgba(250,250,247,0.35)" stroke-width="0.5"></polygon>
+                  <sc-for list="{{ radarAxes }}" as="ax" hint-placeholder-count="6">
+                    <line x1="120" y1="120" x2="{{ ax.x }}" y2="{{ ax.y }}" stroke="rgba(250,250,247,0.35)" stroke-width="0.5"></line>
+                  </sc-for>
+                  <polygon points="{{ radarData }}" fill="rgba(250,250,247,0.22)" stroke="#F5F5F0" stroke-width="1.5"></polygon>
+                </svg>
+                <span style="position:absolute;left:50%;top:calc(14.4% - 8px);transform:translate(-50%,-100%);white-space:nowrap;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:rgba(250,250,247,0.7)">Possession</span>
+                <span style="position:absolute;left:calc(75.7% + 8px);top:32.2%;transform:translateY(-50%);white-space:nowrap;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:rgba(250,250,247,0.7)">Pressing</span>
+                <span style="position:absolute;left:calc(75.7% + 8px);top:67.8%;transform:translateY(-50%);white-space:nowrap;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:rgba(250,250,247,0.7)">Directness</span>
+                <span style="position:absolute;left:50%;top:calc(85.6% + 8px);transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:rgba(250,250,247,0.7)">Width</span>
+                <span style="position:absolute;right:calc(75.7% + 8px);top:67.8%;transform:translateY(-50%);white-space:nowrap;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:rgba(250,250,247,0.7)">Creation</span>
+                <span style="position:absolute;right:calc(75.7% + 8px);top:32.2%;transform:translateY(-50%);white-space:nowrap;font-size:10px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:rgba(250,250,247,0.7)">Defending</span>
+              </div>
+              <div style="max-width:520px;font-size:13px;line-height:1.6;color:#F5F5F0;text-align:center">{{ team.blurb }}</div>
+            </div>
+          </div>
+          <div style="flex:1 1 340px;min-width:300px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+            <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:8px">Group {{ team.group }} · final table</div>
+            <sc-for list="{{ teamGroupRows }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-top:0.5px solid rgba(250,250,247,0.25);font-size:12px;color:#F5F5F0">
+                <span style="{{ r.dotStyle }}"></span>
+                <span style="font-size:15px;line-height:1">{{ r.flag }}</span>
+                <span style="font-weight:500">{{ r.name }}</span>
+                <span style="flex:1"></span>
+                <span style="font-family:'DM Mono',monospace;color:rgba(250,250,247,0.62)">{{ r.gd }} GD</span>
+                <span style="font-family:'DM Mono',monospace;font-weight:500;color:#FAFAF7;white-space:nowrap;min-width:38px;text-align:right">{{ r.pts }} pts</span>
+              </div>
+            </sc-for>
+            <div style="margin-top:16px">
+              <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:10px">Tournament metrics</div>
+              <sc-for list="{{ teamBars }}" as="b" hint-placeholder-count="3">
+                <div style="margin-bottom:10px">
+                  <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+                    <span style="color:#F5F5F0">{{ b.label }}</span>
+                    <span style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62)">{{ b.val }}</span>
+                  </div>
+                  <div style="height:5px;background:rgba(250,250,247,0.18)">
+                    <div style="{{ b.fillStyle }}"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:12px">Tournament run</div>
+          <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:6px">
+            <sc-for list="{{ teamMatches }}" as="m" hint-placeholder-count="6">
+              <div style="flex:0 0 auto;min-width:132px;background:#3E5A35;border:0.5px solid rgba(250,250,247,0.25);padding:12px 14px">
+                <div style="font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(250,250,247,0.62)">{{ m.stage }}</div>
+                <div style="display:flex;align-items:center;gap:7px;margin-top:8px">
+                  <span style="font-size:16px;line-height:1">{{ m.flag }}</span>
+                  <span style="font-size:12px;font-weight:500;color:#F5F5F0">{{ m.opp }}</span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">
+                  <span style="font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;color:#F5F5F0">{{ m.score }}</span>
+                  <span style="{{ m.chipStyle }}">{{ m.res }}</span>
+                </div>
+                <div style="font-size:10px;color:rgba(250,250,247,0.62);margin-top:5px">{{ m.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:20px">
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:12px">Key players</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px">
+            <sc-for list="{{ teamPlayers }}" as="p" hint-placeholder-count="3">
+              <button onclick="{{ p.open }}" style="background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:18px 20px;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;transition:border-color 150ms" style-hover="border-color:#FAFAF7">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span style="width:42px;height:42px;border-radius:50%;background:rgba(250,250,247,0.18);color:#F5F5F0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">{{ p.initials }}</span>
+                  <span>
+                    <span style="display:block;font-size:14px;font-weight:500;color:#FAFAF7">{{ p.name }}</span>
+                    <span style="display:block;font-size:11px;color:rgba(250,250,247,0.62);margin-top:1px">{{ p.pos }}</span>
+                  </span>
+                </div>
+                <div style="display:flex;gap:22px;margin-top:14px">
+                  <span><span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;color:#F5F5F0">{{ p.goals }}</span><span style="display:block;font-size:10px;letter-spacing:0.06em;color:rgba(250,250,247,0.62);margin-top:3px">GOALS</span></span>
+                  <span><span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;color:#F5F5F0">{{ p.assists }}</span><span style="display:block;font-size:10px;letter-spacing:0.06em;color:rgba(250,250,247,0.62);margin-top:3px">ASSISTS</span></span>
+                  <span><span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;color:#F5F5F0">{{ p.rating }}</span><span style="display:block;font-size:10px;letter-spacing:0.06em;color:rgba(250,250,247,0.62);margin-top:3px">RATING</span></span>
+                </div>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ PLAYER ============ -->
+  <sc-if value="{{ isPlayer }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Player page" style="position:relative;max-width:1160px;margin:0 auto;padding:24px 24px 56px">
+      <button onclick="{{ playerBack }}" style="background:none;border:none;cursor:pointer;padding:0;font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(250,250,247,0.62)">← {{ playerBackLabel }}</button>
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px">
+        <span style="width:64px;height:64px;border-radius:50%;background:rgba(250,250,247,0.18);color:#F5F5F0;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">{{ player.initials }}</span>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,40px);line-height:1;letter-spacing:0.03em;color:#FAFAF7">{{ player.name }}</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(250,250,247,0.62);margin-top:5px">
+            <span style="font-size:15px;line-height:1">{{ player.flag }}</span>
+            <span>{{ player.teamName }}</span>
+            <span>·</span>
+            <span>{{ player.pos }}</span>
+            <span>·</span>
+            <span style="font-family:'DM Mono',monospace">#{{ player.num }}</span>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ playerNote }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:14px;display:inline-block;background:#FAFAF7;border:1.5px solid #4A6741;color:#2E4228;font-size:11px;font-weight:700;letter-spacing:0.06em;padding:5px 10px">{{ playerNote }}</div>
+      </sc-if>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:16px;margin-top:20px">
+        <sc-for list="{{ playerTiles }}" as="t" hint-placeholder-count="4">
+          <div style="background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:16px 20px">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;color:#F5F5F0">{{ t.value }}</div>
+            <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-top:6px">{{ t.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;align-items:stretch">
+        <div style="flex:1 1 340px;min-width:300px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:14px">Performance</div>
+          <sc-for list="{{ playerBars }}" as="b" hint-placeholder-count="4">
+            <div style="margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+                <span style="color:#F5F5F0">{{ b.label }}</span>
+                <span style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62)">{{ b.val }}</span>
+              </div>
+              <div style="height:5px;background:rgba(250,250,247,0.18)">
+                <div style="{{ b.fillStyle }}"></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="flex:1 1 340px;min-width:300px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:14px">Tournament form · match ratings</div>
+          <div style="display:flex;align-items:flex-end;gap:18px;height:130px;padding:0 6px">
+            <sc-for list="{{ playerForm }}" as="f" hint-placeholder-count="4">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end">
+                <span style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(250,250,247,0.62)">{{ f.r }}</span>
+                <div style="{{ f.barStyle }}"></div>
+                <span style="font-size:10px;font-weight:500;letter-spacing:0.04em;color:rgba(250,250,247,0.62)">{{ f.opp }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ BRACKET ============ -->
+  <sc-if value="{{ isBracket }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Knockout bracket" style="position:relative;max-width:1160px;margin:0 auto;padding:28px 24px 56px">
+      <div style="font-size:20px;font-weight:500;color:#FAFAF7">Knockout bracket</div>
+      <div style="font-size:13px;color:rgba(250,250,247,0.62);margin:4px 0 20px">Every knockout result, from the Round of 32 to France’s title in East Rutherford on July 19.</div>
+      <div style="overflow-x:auto;padding-bottom:12px">
+        <div style="display:flex;gap:22px;min-width:1080px">
+          <sc-for list="{{ bracketCols }}" as="col" hint-placeholder-count="5">
+            <div style="flex:1 1 0;display:flex;flex-direction:column">
+              <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62)">{{ col.title }}</div>
+              <div style="font-size:10px;color:rgba(250,250,247,0.6);margin:2px 0 12px">{{ col.sub }}</div>
+              <div style="flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:8px;min-height:1150px">
+                <sc-for list="{{ col.matches }}" as="m" hint-placeholder-count="4">
+                  <div style="{{ m.cardStyle }}">
+                    <div style="display:flex;align-items:center;gap:7px;padding:2px 0">
+                      <span style="font-size:14px;line-height:1">{{ m.fa }}</span>
+                      <span style="{{ m.aStyle }}">{{ m.ca }}</span>
+                      <span style="flex:1"></span>
+                      <span style="{{ m.asStyle }}">{{ m.sa }}</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:7px;padding:2px 0">
+                      <span style="font-size:14px;line-height:1">{{ m.fb }}</span>
+                      <span style="{{ m.bStyle }}">{{ m.cb }}</span>
+                      <span style="flex:1"></span>
+                      <span style="{{ m.bsStyle }}">{{ m.sb }}</span>
+                    </div>
+                    <div style="margin-top:4px">
+                      <span style="{{ m.noteStyle }}">{{ m.note }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ LEADERS ============ -->
+  <sc-if value="{{ isLeaders }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Stats leaders" style="position:relative;max-width:1160px;margin:0 auto;padding:28px 24px 56px">
+      <div style="font-size:20px;font-weight:500;color:#FAFAF7">Golden Boot (Top scorer)</div>
+      <div style="font-size:13px;color:rgba(250,250,247,0.62);margin:4px 0 20px">104 matches played. Mbappé’s nine goals take the boot.</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;margin-bottom:20px">
+        <sc-for list="{{ topThree }}" as="p" hint-placeholder-count="3">
+          <button onclick="{{ p.open }}" style="{{ p.style }}" style-hover="{{ p.hoverStyle }}">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;color:rgba(250,250,247,0.6)">{{ p.rank }}</span>
+            <span style="width:42px;height:42px;border-radius:50%;background:rgba(250,250,247,0.18);color:#F5F5F0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">{{ p.initials }}</span>
+            <span style="flex:1">
+              <span style="display:block;font-size:14px;font-weight:500;color:#FAFAF7">{{ p.name }}</span>
+              <span style="display:block;font-size:11px;color:rgba(250,250,247,0.62);margin-top:1px">{{ p.flag }} {{ p.teamName }}</span>
+            </span>
+            <span style="text-align:right">
+              <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;color:#F5F5F0">{{ p.goals }}</span>
+              <span style="display:block;font-size:10px;letter-spacing:0.06em;color:rgba(250,250,247,0.62)">GOALS</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:stretch">
+        <div style="flex:2 1 460px;min-width:320px;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:8px 22px 16px">
+          <div style="display:grid;grid-template-columns:28px 1fr repeat(3, minmax(40px, 56px));gap:0 8px;align-items:center;padding:10px 0 6px">
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62)">#</div>
+            <div style="font-size:10px;font-weight:500;letter-spacing:0.06em;color:rgba(250,250,247,0.62)">PLAYER</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">G</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">A</div>
+            <div style="font-size:10px;font-weight:500;color:rgba(250,250,247,0.62);text-align:center">MINS</div>
+          </div>
+          <sc-for list="{{ boardRows }}" as="r" hint-placeholder-count="10">
+            <button onclick="{{ r.open }}" style="{{ r.style }}" style-hover="{{ r.hoverStyle }}">
+              <span style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62)">{{ r.rank }}</span>
+              <span style="display:flex;align-items:center;gap:9px;min-width:0">
+                <span style="font-size:15px;line-height:1">{{ r.flag }}</span>
+                <span style="font-size:12px;font-weight:500;color:#F5F5F0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span>
+                <span style="font-size:11px;color:rgba(250,250,247,0.6);white-space:nowrap">{{ r.teamCode }}</span>
+              </span>
+              <span style="font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:#FAFAF7;text-align:center">{{ r.goals }}</span>
+              <span style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62);text-align:center">{{ r.assists }}</span>
+              <span style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(250,250,247,0.62);text-align:center">{{ r.mins }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="flex:1 1 280px;min-width:260px;display:flex;flex-direction:column;gap:20px">
+          <div style="flex:1;background:#4A6741;border:1.5px solid rgba(250,250,247,0.55);padding:20px 22px">
+            <div style="font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(250,250,247,0.62);margin-bottom:6px">Most assists</div>
+            <sc-for list="{{ assistRows }}" as="a" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:0.5px solid rgba(250,250,247,0.25)">
+                <span style="font-size:15px;line-height:1">{{ a.flag }}</span>
+                <span style="font-size:12px;font-weight:500;color:#F5F5F0">{{ a.name }}</span>
+                <span style="flex:1"></span>
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1;color:#F5F5F0">{{ a.n }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:1;background:#FAFAF7;border:1.5px solid #4A6741;padding:20px 22px">
+            <div style="font-size:10px;font-weight:500;letter-spacing:0.08em;color:rgba(46,66,40,0.62)">TOURNAMENT AWARDS</div>
+            <sc-for list="{{ awards }}" as="aw" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(46,66,40,0.15)">
+                <span style="font-size:15px;line-height:1">{{ aw.flag }}</span>
+                <span>
+                  <span style="display:block;font-size:13px;font-weight:700;color:#2E4228">{{ aw.name }}</span>
+                  <span style="display:block;font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(46,66,40,0.62);margin-top:1px">{{ aw.award }}</span>
+                </span>
+                <span style="flex:1"></span>
+                <span style="font-size:11px;color:rgba(46,66,40,0.6)">{{ aw.detail }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
