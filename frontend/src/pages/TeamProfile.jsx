@@ -33,10 +33,10 @@ const radarPts = (vals) =>
 const RADAR_LABELS = [
   { t: "Possession", style: { left: "50%", top: "calc(14.4% - 8px)", transform: "translate(-50%,-100%)" } },
   { t: "Pressing", style: { left: "calc(75.7% + 8px)", top: "32.2%", transform: "translateY(-50%)" } },
-  { t: "Directness", style: { left: "calc(75.7% + 8px)", top: "67.8%", transform: "translateY(-50%)" } },
-  { t: "Width", style: { left: "50%", top: "calc(85.6% + 8px)", transform: "translateX(-50%)" } },
-  { t: "Creation", style: { right: "calc(75.7% + 8px)", top: "67.8%", transform: "translateY(-50%)" } },
-  { t: "Defending", style: { right: "calc(75.7% + 8px)", top: "32.2%", transform: "translateY(-50%)" } },
+  { t: "Agression", style: { left: "calc(75.7% + 8px)", top: "67.8%", transform: "translateY(-50%)" } },
+  { t: "Tempo", style: { left: "50%", top: "calc(85.6% + 8px)", transform: "translateX(-50%)" } },
+  { t: "Width", style: { right: "calc(75.7% + 8px)", top: "67.8%", transform: "translateY(-50%)" } },
+  { t: "Patience", style: { right: "calc(75.7% + 8px)", top: "32.2%", transform: "translateY(-50%)" } },
 ];
 
 function Radar({ values }) {

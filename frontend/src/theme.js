@@ -1,5 +1,6 @@
 export const C = {
-  pitch: "#7B9669",
+  pitch: "#658351",
+  pitchStripe: "#6F8C5C",
   deepPitch: "#4A6741",
   turfShadow: "#2E4228",
   dirt: "#8B6F52",
