@@ -1,5 +1,4 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { C, F } from "../theme";
 import logo from "../assets/logo.png";
 
 const LINKS = [
@@ -22,46 +21,49 @@ export default function Nav({ hero }) {
   const active = activePath(pathname);
 
   return (
-    <div style={{ position: "sticky", top: 0, zIndex: 20, background: C.turfShadow, borderBottom: "2px solid rgba(250,250,247,0.7)" }}>
-      <div style={{ maxWidth: 1160, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap", minHeight: 58 }}>
-        <Link to="/" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+    <header
+      className="ps-header"
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 20,
+        background: "var(--turf-shadow)",
+        borderBottom: "2px solid var(--chalk-70)",
+      }}
+    >
+      <div className="ps-header-inner">
+        <Link to="/" viewTransition style={{ display: "flex", alignItems: "center", gap: "var(--sp-2)", textDecoration: "none" }}>
           <img src={logo} alt="" style={{ height: 30, width: "auto", display: "block" }} />
-          <span style={{ fontFamily: F.display, fontSize: 22, letterSpacing: "0.04em", color: C.goalpostWhite }}>PITCHSIDE</span>
+          <span style={{ fontFamily: "var(--font-display)", fontSize: "var(--display-sm)", letterSpacing: "0.04em", color: "var(--goalpost)" }}>
+            PITCHSIDE
+          </span>
         </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+        <nav aria-label="Primary" className="ps-nav">
           {LINKS.map(([label, path]) => (
             <Link
               key={path}
               to={path}
-              style={{
-                textDecoration: "none",
-                fontFamily: F.sans,
-                fontSize: 13,
-                fontWeight: active === path ? 500 : 400,
-                padding: "19px 2px 17px",
-                color: active === path ? C.chalk : "rgba(250,250,247,0.6)",
-                borderBottom: active === path ? `2px solid ${C.goalpostWhite}` : "2px solid transparent",
-                transition: "color 150ms",
-              }}
+              viewTransition
+              className="ps-nav-link"
+              aria-current={active === path ? "page" : undefined}
             >
               {label}
             </Link>
           ))}
-        </div>
+        </nav>
         <div style={{ flex: 1 }} />
         {hero && (
-          <button
-            onClick={() => navigate("/bracket")}
-            style={{ display: "flex", alignItems: "center", gap: 8, background: C.chalk, border: `1.5px solid ${C.deepPitch}`, cursor: "pointer", padding: "5px 12px" }}
-          >
+          <button className="ps-scorepill ps-light" onClick={() => navigate("/bracket", { viewTransition: true })}>
             <span style={{ fontSize: 14, lineHeight: 1 }}>{hero.home.flag}</span>
-            <span style={{ fontSize: 11, fontWeight: 700, color: C.turfShadow, letterSpacing: "0.02em" }}>
+            <span style={{ fontSize: "var(--text-xs)", fontWeight: 700, color: "var(--ink)", letterSpacing: "0.02em" }}>
               {hero.home.code} {hero.homeScore}–{hero.awayScore} {hero.away.code}
             </span>
-            <span style={{ fontFamily: F.mono, fontSize: 11, color: "rgba(46,66,40,0.62)" }}>FT · FINAL</span>
+            <span className="ps-scorepill-meta" style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--ink-60)" }}>
+              FT · FINAL
+            </span>
           </button>
         )}
       </div>
-    </div>
+    </header>
   );
 }

@@ -1,5 +1,84 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Pitchside design tokens
+   ------------------------------------------------------------------------ */
+:root {
+  /* palette */
+  --pitch: #658351;
+  --pitch-stripe: #6f8c5c;
+  --pitch-deep: #4a6741;
+  --pitch-dark: #3e5a35;
+  --turf-shadow: #2e4228;
+  --stadium-shadow: #1c1a16;
+  --chalk: #fafaf7;
+  --goalpost: #f5f5f0;
+  --gold: #f8a828;
+  --silver: #a9afa6;
+  --bronze: #bc8a62;
+
+  /* chalk (light-on-dark) alpha ramp */
+  --chalk-85: rgba(250, 250, 247, 0.85);
+  --chalk-70: rgba(250, 250, 247, 0.7);
+  --chalk-60: rgba(250, 250, 247, 0.62);
+  --chalk-45: rgba(250, 250, 247, 0.45);
+  --chalk-border: rgba(250, 250, 247, 0.55);
+  --chalk-rule: rgba(250, 250, 247, 0.25);
+  --chalk-rule-soft: rgba(250, 250, 247, 0.15);
+  --chalk-fill: rgba(250, 250, 247, 0.18);
+  --chalk-wash: rgba(250, 250, 247, 0.12);
+
+  /* ink (dark-on-light) alpha ramp */
+  --ink: #2e4228;
+  --ink-60: rgba(46, 66, 40, 0.62);
+  --ink-45: rgba(46, 66, 40, 0.5);
+  --ink-rule: rgba(46, 66, 40, 0.18);
+  --elim-dot: rgba(28, 26, 22, 0.4);
+
+  /* result chips */
+  --win-fg: #cfe6be;
+  --win-bg: rgba(207, 230, 190, 0.16);
+  --draw-fg: #f0d9a0;
+  --draw-bg: rgba(240, 217, 160, 0.14);
+  --loss-fg: #f2b3a0;
+  --loss-bg: rgba(242, 179, 160, 0.16);
+
+  /* typography */
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+
+  --text-2xs: 0.625rem;   /* 10 — micro labels, table headers */
+  --text-xs: 0.6875rem;   /* 11 — captions, meta */
+  --text-sm: 0.75rem;     /* 12 — table cells, secondary */
+  --text-md: 0.8125rem;   /* 13 — body */
+  --text-base: 0.875rem;  /* 14 — emphasized body */
+  --display-sm: 1.375rem; /* 22 — inline display numbers */
+  --display-md: 1.75rem;  /* 28 — page titles */
+  --display-lg: 2.25rem;  /* 36 — stat tiles */
+
+  /* spacing scale: 4 / 8 / 12 / 16 / 20 / 24 / 32 / 48 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
+
+  /* structure */
+  --page-max: 1160px;
+  --border-card: 1.5px;
+  --shadow-print: 4px 4px 0 rgba(28, 26, 22, 0.22);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,21 +86,425 @@
 }
 
 body {
-  background: #658351;
-  background-image: linear-gradient(90deg, #6f8c5c 0 50%, #658351 50% 100%);
+  background: var(--pitch);
+  background-image: linear-gradient(90deg, var(--pitch-stripe) 0 50%, var(--pitch) 50% 100%);
   background-size: 280px 100%;
   background-position: top center;
   background-repeat: repeat;
   background-attachment: fixed;
-  font-family: "DM Sans", sans-serif;
-  color: #fafaf7;
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  color: var(--chalk);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: #f5f5f0;
-  color: #2e4228;
+  background: var(--goalpost);
+  color: var(--ink);
+}
+
+/* Keyboard focus — chalk ring on turf, ink ring inside light cards */
+:focus-visible {
+  outline: 2px solid var(--chalk);
+  outline-offset: 2px;
+}
+.ps-light :focus-visible,
+.ps-light:focus-visible {
+  outline-color: var(--ink);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---------------------------------------------------------------------------
+   Type
+   ------------------------------------------------------------------------ */
+.ps-title {
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--chalk);
+}
+
+.ps-subtitle {
+  font-size: var(--text-md);
+  color: var(--chalk-60);
+  margin-top: 6px;
+}
+
+.ps-label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--chalk-60);
+}
+
+.ps-label--ink {
+  color: var(--ink-60);
+}
+
+.ps-th {
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--chalk-60);
+}
+
+.ps-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--chalk-60);
+}
+
+.ps-display {
+  font-family: var(--font-display);
+  line-height: 1;
+  color: var(--goalpost);
+}
+
+/* ---------------------------------------------------------------------------
+   Surfaces
+   ------------------------------------------------------------------------ */
+.ps-card {
+  background: var(--pitch-deep);
+  border: var(--border-card) solid var(--chalk-border);
+  padding: var(--sp-5) 22px;
+}
+
+.ps-card--light {
+  background: var(--chalk);
+  border: var(--border-card) solid var(--pitch-deep);
+  color: var(--ink);
+}
+
+.ps-card--gold {
+  background: var(--gold);
+  border: var(--border-card) solid var(--chalk);
+}
+
+/* Clickable card: brightened border + print-style offset shadow on hover */
+.ps-card-btn {
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.ps-card-btn:hover {
+  border-color: var(--chalk);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-print);
+}
+.ps-card-btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.ps-card-btn.ps-card--gold:hover {
+  border-color: var(--turf-shadow);
+}
+
+/* Interactive table row */
+.ps-row-btn {
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  background: none;
+  border: none;
+  border-top: 0.5px solid var(--chalk-rule);
+  width: 100%;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.ps-row-btn:hover {
+  background: var(--chalk-wash);
+}
+.ps-row-btn:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Quiet inline text button / link */
+.ps-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--goalpost);
+  text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.ps-link:hover {
+  opacity: 0.75;
+}
+.ps-link .ps-link-arrow {
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.ps-link:hover .ps-link-arrow,
+.ps-card-btn:hover .ps-link-arrow {
+  transform: translateX(3px);
+}
+
+.ps-backlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  text-decoration: none;
+  font-size: var(--text-sm);
+  color: var(--chalk-60);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.ps-backlink:hover {
+  color: var(--chalk);
+}
+.ps-backlink .ps-link-arrow {
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.ps-backlink:hover .ps-link-arrow {
+  transform: translateX(-3px);
+}
+
+/* Group picker pill */
+.ps-pill {
+  background: none;
+  color: var(--chalk-60);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  line-height: 24px;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+.ps-pill:hover {
+  background: var(--chalk-wash);
+  color: var(--chalk);
+}
+.ps-pill[aria-pressed="true"] {
+  background: var(--goalpost);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------------------
+   Nav
+   ------------------------------------------------------------------------ */
+.ps-header-inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  min-height: 58px;
+}
+
+.ps-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+@media (max-width: 680px) {
+  .ps-header-inner {
+    padding: 10px var(--sp-4) 0;
+  }
+  /* logo + score pill on row one; nav becomes a full-width scrollable row */
+  .ps-nav {
+    order: 3;
+    flex: 1 1 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * var(--sp-4));
+    padding: 0 var(--sp-4);
+  }
+  .ps-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .ps-nav-link {
+    padding: 10px 8px 12px;
+  }
+  .ps-scorepill-meta {
+    display: none;
+  }
+}
+
+.ps-nav-link {
+  position: relative;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 400;
+  padding: 19px 8px 17px;
+  color: var(--chalk-60);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.ps-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 0;
+  height: 2px;
+  background: var(--goalpost);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.ps-nav-link:hover {
+  color: var(--chalk);
+}
+.ps-nav-link[aria-current="page"] {
+  color: var(--chalk);
+  font-weight: 500;
+}
+.ps-nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+.ps-nav-link:focus-visible {
+  outline-offset: -2px;
+}
+
+.ps-scorepill {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: var(--chalk);
+  border: var(--border-card) solid var(--pitch-deep);
+  cursor: pointer;
+  padding: 6px 12px;
+  min-height: 32px;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.ps-scorepill:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 rgba(28, 26, 22, 0.35);
+}
+.ps-scorepill:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero
+   ------------------------------------------------------------------------ */
+.ps-hero-teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 5vw, 56px);
+  flex-wrap: wrap;
+  padding: 26px 0 6px;
+}
+
+@media (max-width: 560px) {
+  .ps-hero-teams {
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Page entrance + loading
+   ------------------------------------------------------------------------ */
+@keyframes psEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ps-page {
+  position: relative;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-6) 56px;
+  animation: psEnter 460ms var(--ease-out) both;
+}
+
+/* Cross-fade between routes (View Transitions API; router opts in per-link).
+   The sticky header gets its own snapshot so it stays put while pages fade. */
+.ps-header {
+  view-transition-name: ps-header;
+}
+
+@keyframes psVtOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes psVtIn {
+  from {
+    opacity: 0;
+  }
+}
+
+::view-transition-old(root) {
+  animation: psVtOut 320ms var(--ease-out) both;
+}
+
+::view-transition-new(root) {
+  animation: psVtIn 320ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(ps-header),
+  ::view-transition-new(ps-header) {
+    animation: none !important;
+  }
+}
+
+/* Hold the skeleton back briefly — fast responses swap straight to content
+   without a skeleton flash. */
+.ps-loading-reveal {
+  opacity: 0;
+  animation: psFadeIn 260ms var(--ease-out) 180ms forwards;
+}
+
+@keyframes psFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes psShimmer {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+.ps-skeleton {
+  background: var(--pitch-deep);
+  border: var(--border-card) solid var(--chalk-rule);
+  animation: psShimmer 900ms ease-in-out infinite alternate;
 }
 
 @keyframes psBar {
@@ -39,5 +522,15 @@ body {
   }
   to {
     transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
