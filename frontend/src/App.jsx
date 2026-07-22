@@ -1,4 +1,5 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Teams from "./pages/Teams";
@@ -49,7 +50,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Analytics />
+    </>
+  );
 }
 
 export default App;
