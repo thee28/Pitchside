@@ -16,10 +16,19 @@ class SeedFileSource:
 
 
 class ApiSource:
+    """API-Football facts merged onto the editorial seed.
+
+    Reads the on-disk cache in seed/raw_cache/ (populated by `python -m
+    etl.pull_raw` while an API-Football Pro plan is active) and overlays real
+    standings, group fixtures, player stats and the Golden Boot onto the
+    editorial seed. Makes no network calls — the committed cache keeps this
+    reproducible after the subscription lapses.
+    """
+
     def fetch(self) -> dict:
-        raise NotImplementedError(
-            "Real football API ingestion not implemented yet; use the seed source."
-        )
+        from etl.merge import build_merged
+
+        return build_merged()
 
 
 def get_source():
