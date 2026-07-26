@@ -82,7 +82,7 @@ export default function Leaders() {
     <PageShell label="Stats leaders">
       <h1 className="ps-title">GOLDEN BOOT</h1>
       <p className="ps-subtitle" style={{ marginBottom: "var(--sp-5)" }}>
-        104 matches played. Mbappé’s nine goals take the boot.
+        104 matches played. {data.board[0].name.split(" ").slice(-1)[0]}’s {data.board[0].goals} goals take the boot.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "var(--sp-4)", marginBottom: "var(--sp-5)" }}>
         {data.board.slice(0, 3).map((p, i) => (

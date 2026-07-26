@@ -66,7 +66,7 @@ export default function Bracket() {
     <PageShell label="Knockout bracket">
       <h1 className="ps-title">KNOCKOUT BRACKET</h1>
       <p className="ps-subtitle" style={{ marginBottom: "var(--sp-5)" }}>
-        Every knockout result, from the Round of 32 to France’s title in East Rutherford on July 19.
+        Every knockout result, from the Round of 32 to the final in East Rutherford on July 19.
       </p>
       <div style={{ overflowX: "auto", paddingBottom: "var(--sp-3)" }}>
         <div style={{ display: "flex", gap: 22, minWidth: 1080 }}>

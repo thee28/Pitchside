@@ -138,6 +138,16 @@ def main() -> None:
     validate(frames)
     engine = create_engine(SYNC_DATABASE_URL)
     with engine.begin() as conn:
+        # Full replace: the source is an authoritative snapshot, and a realign can
+        # change natural keys (e.g. the FINAL pairing), which upsert-on-conflict
+        # alone would leave behind as orphan rows. Clear first, then insert.
+        conn.execute(
+            text(
+                "TRUNCATE "
+                + ", ".join(TABLES)
+                + " RESTART IDENTITY CASCADE"
+            )
+        )
         for name, df in frames.items():
             upsert(conn, name, df)
             count = conn.execute(text(f"SELECT count(*) FROM {name}")).scalar()
