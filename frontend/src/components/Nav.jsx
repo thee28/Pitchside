@@ -54,7 +54,6 @@ export default function Nav({ hero }) {
         <div style={{ flex: 1 }} />
         {hero && (
           <button className="ps-scorepill ps-light" onClick={() => navigate("/bracket", { viewTransition: true })}>
-            <span style={{ fontSize: 14, lineHeight: 1 }}>{hero.home.flag}</span>
             <span style={{ fontSize: "var(--text-xs)", fontWeight: 700, color: "var(--ink)", letterSpacing: "0.02em" }}>
               {hero.home.code} {hero.homeScore}–{hero.awayScore} {hero.away.code}
             </span>
