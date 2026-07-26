@@ -52,16 +52,28 @@ FATE_BY_STAGE = {
     "SEMI-FINAL": "Semi-finals",  # overridden by the third-place game
 }
 
-# Primary shirt colour per nation, for the home hero possession bar
-# (stats.colors). Only the FINAL is rendered with these; anything missing
-# falls back to the pitch greens.
+# A prominent flag colour per nation for the possession bars (match stats).
+# Deliberately avoids white/near-white (invisible on the cream card) and the
+# app's own greens, so every bar reads as the team's identity.
 TEAM_COLORS = {
-    "ESP": "#C60B1E", "ARG": "#75AADB", "FRA": "#0055A4", "ENG": "#C8102E",
-    "BRA": "#009C3B", "POR": "#006600", "NED": "#F36C21", "GER": "#111111",
-    "MEX": "#006847", "USA": "#3C3B6E", "MAR": "#C1272D", "NOR": "#BA0C2F",
-    "BEL": "#E30613", "CRO": "#FF0000", "COL": "#FCD116",
+    "ALG": "#006233", "ARG": "#75AADB", "AUS": "#00247D", "AUT": "#ED2939",
+    "BEL": "#FDDA24", "BIH": "#FECB00", "BRA": "#009C3B", "CAN": "#D52B1E",
+    "CIV": "#F77F00", "COL": "#FCD116", "CPV": "#003893", "CRO": "#D91E18",
+    "CUR": "#002B7F", "CZE": "#D7141A", "DRC": "#007FFF", "ECU": "#FFC72C",
+    "EGY": "#CE1126", "ENG": "#C8102E", "ESP": "#C60B1E", "FRA": "#0055A4",
+    "GER": "#1A1A1A", "GHA": "#CE1126", "HAI": "#00209F", "IRN": "#239F40",
+    "IRQ": "#CE1126", "JOR": "#007A3D", "JPN": "#BC002D", "KOR": "#CD2E3A",
+    # MAR (green star) and POR (green hoist) use their flag's green so they don't
+    # read as another red bar against red opponents (Canada, Croatia, Spain).
+    "KSA": "#006C35", "MAR": "#006233", "MEX": "#006847", "NED": "#F36C21",
+    # NOR blue, BEL yellow: their flags' secondary colour, distinct from the red
+    # opponents (England, Spain) they actually faced.
+    "NOR": "#00205B", "NZL": "#00247D", "PAN": "#005293", "PAR": "#D52B1E",
+    "POR": "#006600", "QAT": "#8A1538", "RSA": "#007A4D", "SCO": "#0065BF",
+    "SEN": "#00853F", "SUI": "#D52B1E", "SWE": "#FECC00", "TUN": "#E70013",
+    "TUR": "#E30A17", "URU": "#0038A8", "USA": "#3C3B6E", "UZB": "#0099B5",
 }
-FALLBACK_COLORS = ["#4a7c40", "#89a06f"]
+FALLBACK_COLORS = ["#3d5a80", "#98a6ad"]
 
 
 def norm(s: str) -> str:
