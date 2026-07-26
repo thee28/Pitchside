@@ -217,14 +217,16 @@ export default function TeamProfile() {
           </div>
         </section>
 
-        <div style={{ marginTop: "var(--sp-5)" }}>
-          <h2 className="ps-label" style={{ marginBottom: "var(--sp-3)" }}>Key players</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "var(--sp-4)" }}>
-            {data.keyPlayers.map((p) => (
-              <KeyPlayer key={p.id} player={p} />
-            ))}
+        {data.keyPlayers.length > 0 && (
+          <div style={{ marginTop: "var(--sp-5)" }}>
+            <h2 className="ps-label" style={{ marginBottom: "var(--sp-3)" }}>Key players</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "var(--sp-4)" }}>
+              {data.keyPlayers.map((p) => (
+                <KeyPlayer key={p.id} player={p} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

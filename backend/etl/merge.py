@@ -403,6 +403,74 @@ def team_metrics(matches: list[dict], id2code: dict) -> dict[str, dict]:
     return out
 
 
+def compute_radars(id2code: dict) -> dict[str, list[int]]:
+    """code -> [possession, pressing, aggression, tempo, width, patience].
+
+    Grounded in each side's real match statistics, then min-max normalised
+    across all teams to 40–95 so every radar reads as a distinct, full shape
+    (the point here is a cool, legible fingerprint, not analytic precision).
+    Axis order matches RADAR_LABELS in the frontend.
+    """
+    def num(v):
+        if v in (None, ""):
+            return None
+        return float(str(v).rstrip("%"))
+
+    raw: dict[str, dict] = {}
+
+    def slot(code):
+        return raw.setdefault(code, {k: [] for k in
+                ("poss", "patience", "tempo", "width", "aggression", "pressing")})
+
+    for f in (CACHE / "fixtures_stats").glob("*.json"):
+        entries = []
+        for team in json.loads(f.read_text()).get("response", []):
+            code = id2code.get(team["team"]["id"])
+            d = {s["type"]: s["value"] for s in team["statistics"]}
+            entries.append((code, d))
+        for i, (code, d) in enumerate(entries):
+            if code is None:
+                continue
+            opp = entries[1 - i][1] if len(entries) == 2 else {}
+            s = slot(code)
+            for key, val in (
+                ("poss", num(d.get("Ball Possession"))),
+                ("patience", num(d.get("Passes %"))),
+                ("tempo", num(d.get("Total Shots"))),
+                ("width", num(d.get("Corner Kicks"))),
+                ("aggression", num(d.get("Fouls"))),
+            ):
+                if val is not None:
+                    s[key].append(val)
+            opp_pass = num(opp.get("Passes %"))
+            if opp_pass is not None:
+                s["pressing"].append(100 - opp_pass)  # forcing errors = pressing
+
+    means = {
+        code: {k: (sum(v) / len(v) if v else None) for k, v in axes.items()}
+        for code, axes in raw.items()
+    }
+
+    def scaled(key):
+        vals = [m[key] for m in means.values() if m[key] is not None]
+        lo, hi = (min(vals), max(vals)) if vals else (0, 1)
+        span = (hi - lo) or 1
+        return lambda x: round(40 + (x - lo) / span * 55) if x is not None else 68
+
+    fns = {k: scaled(k) for k in ("poss", "pressing", "aggression", "tempo", "width", "patience")}
+    return {
+        code: [
+            fns["poss"](m["poss"]),
+            fns["pressing"](m["pressing"]),
+            fns["aggression"](m["aggression"]),
+            fns["tempo"](m["tempo"]),
+            fns["width"](m["width"]),
+            fns["patience"](m["patience"]),
+        ]
+        for code, m in means.items()
+    }
+
+
 def _team_xg_by_fixture(id2code: dict) -> dict[int, dict]:
     """fixture id -> {code: expected_goals} from the cached statistics files."""
     out: dict[int, dict] = {}
@@ -422,11 +490,21 @@ def _team_xg_by_fixture(id2code: dict) -> dict[int, dict]:
 _BAR_SCALE = {"gpm": 3.5, "xgpm": 3.0, "cpm": 2.5}
 
 
+_DEFAULT_BARS = [
+    ["Goals per match", "0.0", 0],
+    ["xG per match", "0.0", 0],
+    ["Goals conceded / match", "0.0", 0],
+]
+
+
 def _team_bars(metrics: dict | None, seed_bars: list) -> list:
-    if not seed_bars or not metrics:
+    if not metrics:
         return seed_bars
+    # Teams without an editorial bar set (everyone outside the original 7) get
+    # the standard three metrics built from real data.
+    bars = seed_bars or _DEFAULT_BARS
     out = []
-    for label, value, pct_old in seed_bars:
+    for label, value, pct_old in bars:
         low = label.lower()
         if "conceded" in low:
             key = "cpm"
@@ -445,21 +523,38 @@ def _team_bars(metrics: dict | None, seed_bars: list) -> list:
     return out
 
 
+# Sort weight for the teams grid: deepest run first, then group points.
+_FATE_ORDER = {
+    "World Champions": 0, "Runners-up": 1, "Third place": 2, "Fourth place": 3,
+    "Quarter-finals": 4, "Round of 16": 5, "Round of 32": 6, "Group stage": 7,
+}
+
+
 def merge_teams(editorial: dict, matches: list[dict], id2code: dict, id2name: dict) -> list:
     fates = compute_fates(matches)
     metrics = team_metrics(matches, id2code)
-    out = []
+    radars = compute_radars(id2code)
+    points = {r["team_code"]: r["points"] for r in merge_standings(editorial, id2code)}
+
+    merged_all = []
     for t in editorial["teams"]:
         code = t["code"]
         fate = fates.get(code, "Group stage")
-        merged = dict(t)
-        merged["fate"] = fate
-        merged["sub"] = fate
-        merged["status"] = fate
-        merged["blurb"] = _blurb(code, t["name"], fate, matches, id2name)
-        merged["bars"] = _team_bars(metrics.get(code), t["bars"])
-        out.append(merged)
-    return out
+        m = dict(t)
+        m["fate"] = fate
+        m["sub"] = fate
+        m["status"] = fate
+        m["blurb"] = _blurb(code, t["name"], fate, matches, id2name)
+        m["bars"] = _team_bars(metrics.get(code), t["bars"])
+        m["radar"] = radars.get(code) or t.get("radar") or [68] * 6
+        m["has_profile"] = True  # every team is now clickable
+        merged_all.append(m)
+
+    # Assign a stable grid order by how far each side went, champions first.
+    merged_all.sort(key=lambda m: (_FATE_ORDER.get(m["fate"], 9), -points.get(m["code"], 0), m["name"]))
+    for i, m in enumerate(merged_all):
+        m["card_order"] = i
+    return merged_all
 
 
 def merge_standings(editorial: dict, id2code: dict[int, str]) -> list:
