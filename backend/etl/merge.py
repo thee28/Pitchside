@@ -599,7 +599,14 @@ def merge_matches(matches: list[dict], id2code: dict) -> list:
     return out
 
 
-def merge_players(editorial: dict, agg_by_name: dict, id2code: dict) -> tuple[list, list]:
+def merge_players(editorial: dict, agg_by_name: dict, award_winners: set, id2code: dict) -> tuple[list, list]:
+    def clean_note(name: str, note: str | None) -> str | None:
+        # Drop any award badge ("GOLDEN …") the player no longer holds — the real
+        # winners live in `award_winners`. Keeps a legit badge (e.g. Mbappé's boot).
+        if note and "GOLDEN" in note.upper() and norm(name) not in award_winners:
+            return None
+        return note
+
     players, unmatched = [], []
     for p in editorial["players"]:
         agg = agg_by_name.get(norm(p["name"]))
@@ -608,6 +615,7 @@ def merge_players(editorial: dict, agg_by_name: dict, id2code: dict) -> tuple[li
             # from the leaderboard so we never publish an unverified stat line.
             kept = dict(p)
             kept["board_rank"] = None
+            kept["note"] = clean_note(p["name"], p.get("note"))
             players.append(kept)
             unmatched.append(p["name"])
             continue
@@ -615,8 +623,11 @@ def merge_players(editorial: dict, agg_by_name: dict, id2code: dict) -> tuple[li
         merged["goals"] = agg["goals"]
         merged["assists"] = agg["assists"]
         merged["minutes"] = agg["minutes"]
-        if p.get("note"):
-            merged["note"] = re.sub(r"\b\d+(?=\s+GOALS\b)", str(agg["goals"]), p["note"])
+        note = clean_note(p["name"], p.get("note"))
+        if note:
+            merged["note"] = re.sub(r"\b\d+(?=\s+GOALS\b)", str(agg["goals"]), note)
+        else:
+            merged["note"] = None
         ratings = [r for _, _, r in agg["form"]]
         if ratings:
             merged["rating"] = round(sum(ratings) / len(ratings), 1)
@@ -701,7 +712,10 @@ def build_merged() -> dict:
     matches = normalised_matches(id2code, id2group)
     agg_by_name, keepers = aggregate_players()
 
-    players, unmatched = merge_players(editorial, agg_by_name, id2code)
+    awards = merge_awards(editorial, agg_by_name, keepers, id2code)
+    award_winners = {norm(a["player_name"]) for a in awards}
+
+    players, unmatched = merge_players(editorial, agg_by_name, award_winners, id2code)
     if unmatched:
         print(f"merge: {len(unmatched)} player(s) kept editorial (no API data): {unmatched}")
 
@@ -710,7 +724,7 @@ def build_merged() -> dict:
         "standings": merge_standings(editorial, id2code),
         "matches": merge_matches(matches, id2code),
         "players": players,
-        "awards": merge_awards(editorial, agg_by_name, keepers, id2code),
+        "awards": awards,
         "tournament_stats": merge_tournament_stats(matches),
     }
 
