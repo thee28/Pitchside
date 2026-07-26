@@ -373,8 +373,81 @@ def _bars_from(agg: dict, seed_bars: list) -> list:
 # section merges
 # ---------------------------------------------------------------------------
 
-def merge_teams(editorial: dict, matches: list[dict], id2name: dict) -> list:
+def team_metrics(matches: list[dict], id2code: dict) -> dict[str, dict]:
+    """code -> {gpm, cpm, xgpm}: real goals, goals conceded and xG per match,
+    aggregated over every match a side actually played (group + knockout)."""
+    acc: dict[str, dict] = {}
+
+    def slot(code):
+        return acc.setdefault(code, {"played": 0, "gf": 0, "ga": 0, "xg": 0.0, "xg_n": 0})
+
+    xg_by_fid = _team_xg_by_fixture(id2code)
+    for m in matches:
+        hs, as_ = m["home_score"] or 0, m["away_score"] or 0
+        h, a = slot(m["home_code"]), slot(m["away_code"])
+        h["played"] += 1; h["gf"] += hs; h["ga"] += as_
+        a["played"] += 1; a["gf"] += as_; a["ga"] += hs
+        for code, xg in (xg_by_fid.get(m["fid"]) or {}).items():
+            s = acc.get(code)
+            if s is not None and xg is not None:
+                s["xg"] += xg; s["xg_n"] += 1
+
+    out = {}
+    for code, s in acc.items():
+        p = s["played"] or 1
+        out[code] = {
+            "gpm": s["gf"] / p,
+            "cpm": s["ga"] / p,
+            "xgpm": (s["xg"] / s["xg_n"]) if s["xg_n"] else None,
+        }
+    return out
+
+
+def _team_xg_by_fixture(id2code: dict) -> dict[int, dict]:
+    """fixture id -> {code: expected_goals} from the cached statistics files."""
+    out: dict[int, dict] = {}
+    for f in (CACHE / "fixtures_stats").glob("*.json"):
+        fid = int(f.stem)
+        per = {}
+        for team in json.loads(f.read_text()).get("response", []):
+            code = id2code.get(team["team"]["id"])
+            xg = next((s["value"] for s in team["statistics"] if s["type"] == "expected_goals"), None)
+            per[code] = float(xg) if xg not in (None, "") else None
+        out[fid] = per
+    return out
+
+
+# Bar-fill denominators (per-match), chosen so a strong side lands high but not
+# pinned at 100%. Purely cosmetic — the numeric label carries the real value.
+_BAR_SCALE = {"gpm": 3.5, "xgpm": 3.0, "cpm": 2.5}
+
+
+def _team_bars(metrics: dict | None, seed_bars: list) -> list:
+    if not seed_bars or not metrics:
+        return seed_bars
+    out = []
+    for label, value, pct_old in seed_bars:
+        low = label.lower()
+        if "conceded" in low:
+            key = "cpm"
+        elif "xg" in low:
+            key = "xgpm"
+        elif "goals per match" in low or ("goal" in low and "conceded" not in low):
+            key = "gpm"
+        else:
+            key = None
+        v = metrics.get(key) if key else None
+        if v is None:
+            out.append([label, value, pct_old])
+        else:
+            width = max(0, min(100, round(v / _BAR_SCALE[key] * 100)))
+            out.append([label, f"{v:.1f}", width])
+    return out
+
+
+def merge_teams(editorial: dict, matches: list[dict], id2code: dict, id2name: dict) -> list:
     fates = compute_fates(matches)
+    metrics = team_metrics(matches, id2code)
     out = []
     for t in editorial["teams"]:
         code = t["code"]
@@ -384,6 +457,7 @@ def merge_teams(editorial: dict, matches: list[dict], id2name: dict) -> list:
         merged["sub"] = fate
         merged["status"] = fate
         merged["blurb"] = _blurb(code, t["name"], fate, matches, id2name)
+        merged["bars"] = _team_bars(metrics.get(code), t["bars"])
         out.append(merged)
     return out
 
@@ -468,7 +542,7 @@ def merge_players(editorial: dict, agg_by_name: dict, id2code: dict) -> tuple[li
     return players, unmatched
 
 
-def merge_awards(editorial: dict, players: list, keepers: dict, id2code: dict) -> list:
+def merge_awards(editorial: dict, agg_by_name: dict, keepers: dict, id2code: dict) -> list:
     awards = [dict(a) for a in editorial["awards"]]
     code2flag = {t["code"]: t["flag"] for t in editorial["teams"]}
     name2code = {norm(t["name"]): t["code"] for t in editorial["teams"]}
@@ -485,18 +559,15 @@ def merge_awards(editorial: dict, players: list, keepers: dict, id2code: dict) -
         boot = {"name": w["player"]["name"], "detail": f"{goals} goals · {assists} assists",
                 "flag": flag_for(w["statistics"][0]["team"]["name"])}
 
-    # Golden Ball (tournament MVP) is a VOTED award the API does not expose. As a
-    # transparent, data-backed proxy we surface the outfield player with the most
-    # goal involvements excluding the Golden Boot winner (avoids naming one player
-    # to both). NOTE: not the official winner — flagged for editorial override.
-    ball = None
-    boot_name = norm(boot["name"]) if boot else None
-    cand = [p for p in players
-            if p.get("board_rank") is not None and norm(p["name"]) != boot_name]
-    if cand:
-        w = max(cand, key=lambda p: (p["goals"] + p["assists"], p["goals"]))
-        ball = {"name": w["name"], "detail": f"{w['goals']} G · {w['assists']} A",
-                "flag": w["flag"]}
+    # Golden Ball (tournament MVP) is a VOTED award the API does not expose.
+    # Editorial fact: the 2026 winner was Rodri (Spain). Minutes come from the
+    # cached data; a holding midfielder's value isn't in the goals column.
+    rodri = agg_by_name.get("rodri")
+    ball = {
+        "name": "Rodri",
+        "flag": code2flag.get("ESP", ""),
+        "detail": f"{rodri['minutes']} mins · World champion" if rodri else "World champion",
+    }
 
     # Golden Glove: goalkeeper with the most clean sheets (computed from cache).
     glove = None
@@ -540,11 +611,11 @@ def build_merged() -> dict:
         print(f"merge: {len(unmatched)} player(s) kept editorial (no API data): {unmatched}")
 
     return {
-        "teams": merge_teams(editorial, matches, id2name),
+        "teams": merge_teams(editorial, matches, id2code, id2name),
         "standings": merge_standings(editorial, id2code),
         "matches": merge_matches(matches, id2code),
         "players": players,
-        "awards": merge_awards(editorial, players, keepers, id2code),
+        "awards": merge_awards(editorial, agg_by_name, keepers, id2code),
         "tournament_stats": merge_tournament_stats(matches),
     }
 
