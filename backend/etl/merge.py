@@ -56,7 +56,7 @@ FATE_BY_STAGE = {
 # (stats.colors). Only the FINAL is rendered with these; anything missing
 # falls back to the pitch greens.
 TEAM_COLORS = {
-    "ESP": "#C60B1E", "ARG": "#75AADB", "FRA": "#0055A4", "ENG": "#FFFFFF",
+    "ESP": "#C60B1E", "ARG": "#75AADB", "FRA": "#0055A4", "ENG": "#C8102E",
     "BRA": "#009C3B", "POR": "#006600", "NED": "#F36C21", "GER": "#111111",
     "MEX": "#006847", "USA": "#3C3B6E", "MAR": "#C1272D", "NOR": "#BA0C2F",
     "BEL": "#E30613", "CRO": "#FF0000", "COL": "#FCD116",
@@ -201,6 +201,38 @@ def _scorers(fid: int, id2code: dict, home_code: str, away_code: str) -> dict | 
         line = f"{e['player']['name']} {minute}′{tag}"
         (home if id2code.get(e["team"]["id"]) == home_code else away).append(line)
     return {"home": home, "away": away}
+
+
+def _lineups(fid: int, home_code: str, away_code: str, id2code: dict) -> dict | None:
+    """{'home': [player rows], 'away': [...]} from the cached fixture players.
+    Starters first (by minutes), then substitutes; ratings/goals included."""
+    path = CACHE / "fixtures_players" / f"{fid}.json"
+    if not path.exists():
+        return None
+    sides: dict[str, list] = {home_code: [], away_code: []}
+    for block in json.loads(path.read_text()).get("response", []):
+        code = id2code.get(block["team"]["id"])
+        if code not in sides:
+            continue
+        for pl in block.get("players", []):
+            g = pl["statistics"][0]["games"]
+            goals = pl["statistics"][0]["goals"]
+            rating = g.get("rating")
+            sides[code].append({
+                "name": pl["player"]["name"],
+                "num": g.get("number"),
+                "pos": g.get("position"),
+                "rating": round(float(rating), 1) if rating is not None else None,
+                "minutes": g.get("minutes") or 0,
+                "goals": goals.get("total") or 0,
+                "assists": goals.get("assists") or 0,
+                "sub": bool(g.get("substitute")),
+            })
+    for rows in sides.values():
+        rows.sort(key=lambda p: (p["sub"], -p["minutes"]))
+    if not sides[home_code] and not sides[away_code]:
+        return None
+    return {"home": sides[home_code], "away": sides[away_code]}
 
 
 def _match_stats(fid: int, home_code: str, away_code: str, id2code: dict, venue_long: str | None) -> dict | None:
@@ -592,9 +624,11 @@ def merge_matches(matches: list[dict], id2code: dict) -> list:
         if m["stage"] in ROUND_TO_STAGE.values():
             row["scorers"] = _scorers(m["fid"], id2code, m["home_code"], m["away_code"])
             row["stats"] = _match_stats(m["fid"], m["home_code"], m["away_code"], id2code, m["_venue_long"])
+            row["lineups"] = _lineups(m["fid"], m["home_code"], m["away_code"], id2code)
         else:
             row["scorers"] = None
             row["stats"] = None
+            row["lineups"] = None
         out.append(row)
     return out
 

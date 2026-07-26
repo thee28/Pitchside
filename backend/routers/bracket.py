@@ -38,6 +38,7 @@ async def bracket(session: AsyncSession = Depends(get_session)):
                 "sub": sub,
                 "matches": [
                     {
+                        "id": m.id,
                         "ca": m.home_code,
                         "cb": m.away_code,
                         "fa": teams[m.home_code],

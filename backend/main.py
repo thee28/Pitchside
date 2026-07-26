@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import bracket, home, leaders, players, teams
+from routers import bracket, home, leaders, matches, players, teams
 
 app = FastAPI(title="Pitchside API")
 
@@ -10,6 +10,7 @@ app.include_router(teams.router)
 app.include_router(players.router)
 app.include_router(bracket.router)
 app.include_router(leaders.router)
+app.include_router(matches.router)
 
 app.add_middleware(
     CORSMiddleware,

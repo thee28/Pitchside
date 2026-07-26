@@ -123,6 +123,7 @@ class PlayerResponse(BaseModel):
 
 
 class BracketMatch(BaseModel):
+    id: int
     ca: str
     cb: str
     fa: str

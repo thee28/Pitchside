@@ -61,6 +61,7 @@ class Match(Base):
     kind: Mapped[str | None] = mapped_column(String(8))
     scorers: Mapped[dict | None] = mapped_column(JSONB)
     stats: Mapped[dict | None] = mapped_column(JSONB)
+    lineups: Mapped[dict | None] = mapped_column(JSONB)
 
 
 class Player(Base):
