@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 
 class TeamRef(BaseModel):
+    id: str
     code: str
     name: str
     flag: str
@@ -12,6 +13,7 @@ class Hero(BaseModel):
     away: TeamRef
     homeScore: int
     awayScore: int
+    winner: str | None
     dateLabel: str | None
     venue: str | None
     scorers: dict | None

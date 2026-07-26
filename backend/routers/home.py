@@ -33,6 +33,7 @@ async def home(session: AsyncSession = Depends(get_session)):
         "away": _ref(teams[final.away_code]),
         "homeScore": final.home_score,
         "awayScore": final.away_score,
+        "winner": final.winner_code,
         "dateLabel": final.date_label,
         "venue": final.venue,
         "scorers": final.scorers,
@@ -110,4 +111,4 @@ async def home(session: AsyncSession = Depends(get_session)):
 
 
 def _ref(team: models.Team) -> dict:
-    return {"code": team.code, "name": team.name, "flag": team.flag}
+    return {"id": team.id, "code": team.code, "name": team.name, "flag": team.flag}

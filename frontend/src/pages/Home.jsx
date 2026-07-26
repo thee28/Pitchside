@@ -8,6 +8,24 @@ const GROUPS = "ABCDEFGHIJKL".split("");
 
 const dotColor = (q) => (q === "q" ? "var(--goalpost)" : q === "t" ? "var(--chalk-border)" : "var(--elim-dot)");
 
+function HeroTeam({ team, champion }) {
+  return (
+    <Link to={`/teams/${team.id}`} viewTransition style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--sp-2)" }}>
+      <span style={{ fontSize: 44, lineHeight: 1 }}>{team.flag}</span>
+      <span style={{ fontSize: "var(--text-sm)", fontWeight: champion ? 700 : 500, letterSpacing: "0.06em", color: champion ? "var(--ink)" : "var(--ink-60)" }}>
+        {team.name.toUpperCase()}
+      </span>
+      {champion ? (
+        <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", color: "var(--chalk)", padding: "3px 8px", backgroundColor: "var(--gold)" }}>
+          WORLD CHAMPIONS
+        </span>
+      ) : (
+        <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.14em", color: "var(--ink-45)" }}>RUNNERS-UP</span>
+      )}
+    </Link>
+  );
+}
+
 function Hero({ hero }) {
   const s = hero.stats || {};
   const scorers = hero.scorers || { home: [], away: [] };
@@ -22,21 +40,11 @@ function Hero({ hero }) {
         <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-md)", color: "var(--ink)" }}>{hero.dateLabel}</span>
       </div>
       <div className="ps-hero-teams">
-        <Link to="/teams/fra" viewTransition style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--sp-2)" }}>
-          <span style={{ fontSize: 44, lineHeight: 1 }}>{hero.home.flag}</span>
-          <span style={{ fontSize: "var(--text-sm)", fontWeight: 700, letterSpacing: "0.06em", color: "var(--ink)" }}>{hero.home.name.toUpperCase()}</span>
-          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", color: "var(--chalk)", padding: "3px 8px", backgroundColor: "var(--gold)" }}>
-            WORLD CHAMPIONS
-          </span>
-        </Link>
+        <HeroTeam team={hero.home} champion={hero.winner === hero.home.code} />
         <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(48px,8vw,64px)", lineHeight: 1, color: "var(--ink)", letterSpacing: "0.05em" }}>
           {hero.homeScore} – {hero.awayScore}
         </div>
-        <Link to="/teams/arg" viewTransition style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--sp-2)" }}>
-          <span style={{ fontSize: 44, lineHeight: 1 }}>{hero.away.flag}</span>
-          <span style={{ fontSize: "var(--text-sm)", fontWeight: 500, letterSpacing: "0.06em", color: "var(--ink-60)" }}>{hero.away.name.toUpperCase()}</span>
-          <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.14em", color: "var(--ink-45)" }}>RUNNERS-UP</span>
-        </Link>
+        <HeroTeam team={hero.away} champion={hero.winner === hero.away.code} />
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: "var(--sp-6)", alignItems: "start", paddingBottom: 14 }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 3, fontSize: "var(--text-sm)", color: "var(--ink-60)" }}>
