@@ -32,6 +32,10 @@ class ApiSource:
 
 
 def get_source():
-    if os.getenv("ETL_SOURCE", "seed") == "api":
-        return ApiSource()
-    return SeedFileSource()
+    # Default to the real, API-Football-backed tournament. The raw cache is
+    # committed under seed/raw_cache/, so this path is fully offline and
+    # reproducible. Set ETL_SOURCE=seed only to load the legacy fabricated
+    # seed (partial, non-factual) for local design work.
+    if os.getenv("ETL_SOURCE", "api") == "seed":
+        return SeedFileSource()
+    return ApiSource()

@@ -85,31 +85,38 @@ def build_frames(raw: dict) -> dict[str, pd.DataFrame]:
     }
 
 
+def _check(cond: bool, msg: str) -> None:
+    # Raise instead of assert so integrity checks survive `python -O`, which
+    # strips assert statements and would let bad data load silently.
+    if not cond:
+        raise ValueError(f"ETL validation failed: {msg}")
+
+
 def validate(frames: dict[str, pd.DataFrame]) -> None:
     teams = frames["teams"]
     codes = set(teams["code"])
     standings = frames["group_standings"]
 
-    assert len(teams) == len(set(teams["id"])) == len(codes), "duplicate team ids/codes"
-    assert set(standings["team_code"]) == codes, "standings/teams mismatch"
+    _check(len(teams) == len(set(teams["id"])) == len(codes), "duplicate team ids/codes")
+    _check(set(standings["team_code"]) == codes, "standings/teams mismatch")
 
     bad = standings[standings["played"] != standings[["won", "drawn", "lost"]].sum(axis=1)]
-    assert bad.empty, f"standings arithmetic broken: {bad['team_code'].tolist()}"
+    _check(bad.empty, f"standings arithmetic broken: {bad['team_code'].tolist()}")
     bad = standings[standings["points"] != standings["won"] * 3 + standings["drawn"]]
-    assert bad.empty, f"points arithmetic broken: {bad['team_code'].tolist()}"
+    _check(bad.empty, f"points arithmetic broken: {bad['team_code'].tolist()}")
 
     matches = frames["matches"]
     match_codes = set(matches["home_code"]) | set(matches["away_code"])
-    assert match_codes <= codes, f"unknown codes in matches: {match_codes - codes}"
+    _check(match_codes <= codes, f"unknown codes in matches: {match_codes - codes}")
 
     players = frames["players"]
-    assert set(players["team_code"]) <= codes, "unknown player team codes"
+    _check(set(players["team_code"]) <= codes, "unknown player team codes")
     profile_ids = set(teams.loc[teams["has_profile"], "id"])
     linked = set(players["team_id"].dropna())
-    assert linked <= profile_ids, f"players linked to non-profile teams: {linked - profile_ids}"
+    _check(linked <= profile_ids, f"players linked to non-profile teams: {linked - profile_ids}")
 
     stats = frames["player_match_stats"]
-    assert set(stats["player_id"]) == set(players["id"]), "form rows/players mismatch"
+    _check(set(stats["player_id"]) == set(players["id"]), "form rows/players mismatch")
 
 
 def upsert(conn, table_name: str, df: pd.DataFrame) -> None:

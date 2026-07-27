@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-export function useFetch(url) {
+// Base URL for the API. Empty in dev so calls stay relative and hit the Vite
+// proxy; set VITE_API_BASE to the backend origin (e.g. https://api.example.com)
+// for a production build served from a different origin.
+const API_BASE = (import.meta.env.VITE_API_BASE ?? "").replace(/\/$/, "");
+
+export function useFetch(path) {
+  const url = `${API_BASE}${path}`;
   const [state, setState] = useState({ url, data: null, loading: true, error: null });
 
   if (state.url !== url) {

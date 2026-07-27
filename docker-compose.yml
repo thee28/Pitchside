@@ -1,3 +1,6 @@
+# Local development database only. The credentials below are throwaway dev
+# defaults; do NOT reuse them in production. Deploy against a managed Postgres
+# and pass its DATABASE_URL to the backend instead.
 services:
   db:
     image: postgres:16

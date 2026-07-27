@@ -14,6 +14,13 @@ OUT_DIR = ROOT / "design"
 
 
 def main() -> None:
+    if not BUNDLE.exists():
+        raise SystemExit(
+            f"Design bundle not found: {BUNDLE.name}\n"
+            "This is the Claude Design export and is NOT committed to the repo. "
+            "Place it at the repo root to regenerate design/, or just use the "
+            "already-extracted design/template.html and design/logic.js."
+        )
     lines = BUNDLE.read_text().split("\n")
     # The embedded app document is the longest JSON-string line in the bundle.
     doc_line = max((l for l in lines if l.startswith('"')), key=len)

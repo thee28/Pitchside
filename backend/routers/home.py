@@ -9,6 +9,9 @@ from routers.shared import STAGE_RANK, timeline_note
 
 router = APIRouter()
 
+# Knockout stages shown on the home page, mapped to their short badge label.
+# Deliberately excludes ROUND OF 32 / ROUND OF 16: the home rail shows only the
+# late rounds (quarter-finals onward). The full tree lives on /api/bracket.
 KO_STAGE_LABELS = {
     "FINAL": "F",
     "THIRD PLACE": "3RD",
@@ -69,7 +72,7 @@ async def home(session: AsyncSession = Depends(get_session)):
     ko_matches = (
         await session.scalars(
             select(models.Match)
-            .where(models.Match.stage.in_(KO_STAGE_LABELS))
+            .where(models.Match.stage.in_(list(KO_STAGE_LABELS)))
             .order_by(models.Match.stage_order)
         )
     ).all()

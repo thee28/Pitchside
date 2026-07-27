@@ -20,8 +20,11 @@ BASE = "https://v3.football.api-sports.io"
 LEAGUE = 1
 SEASON = 2026
 CACHE = Path(__file__).parent / "seed" / "raw_cache"
-KEY = os.environ["API_FOOTBALL_KEY"]
 SSL_CTX = ssl.create_default_context(cafile=certifi.where())
+
+# Set in main() so merely importing this module (e.g. under test collection)
+# never requires the key. Only a live pull needs it.
+KEY: str | None = None
 
 
 def get(path: str, **params) -> dict:
@@ -45,6 +48,13 @@ def cache(name: str, path: str, **params) -> dict:
 
 
 def main() -> None:
+    global KEY
+    KEY = os.environ.get("API_FOOTBALL_KEY")
+    if not KEY:
+        raise SystemExit(
+            "API_FOOTBALL_KEY is not set. Add it to backend/.env "
+            "(see .env.example) before running a live pull."
+        )
     CACHE.mkdir(parents=True, exist_ok=True)
 
     cache("teams", "teams", league=LEAGUE, season=SEASON)
