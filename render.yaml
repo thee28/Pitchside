@@ -1,0 +1,34 @@
+# Render Blueprint for the Pitchside backend + database.
+# Deploy: Render Dashboard -> New -> Blueprint -> pick this repo.
+# The frontend is hosted elsewhere; set CORS_ORIGINS to its URL (see below).
+databases:
+  - name: pitchside-db
+    plan: free
+    databaseName: pitchside
+    user: pitchside
+
+services:
+  - type: web
+    name: pitchside-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    # Install deps, create schema, then load the real tournament (ETL_SOURCE=api,
+    # offline from the committed cache). Runs once per deploy, so no request ever
+    # hits a mid-load empty table.
+    buildCommand: pip install -r requirements.txt && alembic upgrade head && python -m etl.load
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pitchside-db
+          property: connectionString
+      - key: ETL_SOURCE
+        value: api
+      - key: PYTHON_VERSION
+        value: "3.13.4"
+      # Set to the deployed frontend origin, e.g. https://pitchside.vercel.app
+      # No trailing slash. Comma-separate multiple origins.
+      - key: CORS_ORIGINS
+        sync: false
