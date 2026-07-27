@@ -52,19 +52,19 @@ function Podium({ p, medal }) {
   );
 }
 
-const boardGrid = { display: "grid", gridTemplateColumns: "28px 1fr repeat(3, minmax(40px, 56px))", gap: "0 8px", alignItems: "center" };
+const boardGrid = { display: "grid", gridTemplateColumns: "22px minmax(0, 1fr) 26px 26px 46px", gap: "0 6px", alignItems: "center" };
 
 function BoardRow({ r }) {
   const navigate = useNavigate();
   return (
     <button className="ps-row-btn" onClick={() => navigate(`/players/${r.id}`, { viewTransition: true })} style={{ ...boardGrid, padding: "9px 0" }}>
       <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", color: "var(--chalk-60)" }}>{r.rank}</span>
-      <span style={{ display: "flex", alignItems: "center", gap: 9, minWidth: 0 }}>
-        <span style={{ fontSize: 15, lineHeight: 1 }}>{r.flag}</span>
-        <span style={{ fontSize: "var(--text-sm)", fontWeight: 500, color: "var(--goalpost)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+      <span style={{ display: "flex", alignItems: "center", gap: 9, minWidth: 0, overflow: "hidden" }}>
+        <span style={{ fontSize: 15, lineHeight: 1, flex: "0 0 auto" }}>{r.flag}</span>
+        <span style={{ fontSize: "var(--text-sm)", fontWeight: 500, color: "var(--goalpost)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", flex: "1 1 auto", minWidth: 0 }}>
           {r.name}
         </span>
-        <span style={{ fontSize: "var(--text-xs)", color: "var(--chalk-60)", whiteSpace: "nowrap" }}>{r.teamName}</span>
+        <span className="ps-board-team" style={{ fontSize: "var(--text-xs)", color: "var(--chalk-60)", whiteSpace: "nowrap", flex: "0 1 auto", overflow: "hidden", textOverflow: "ellipsis" }}>{r.teamName}</span>
       </span>
       <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", fontWeight: 500, color: "var(--chalk)", textAlign: "center" }}>{r.goals}</span>
       <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", color: "var(--chalk-60)", textAlign: "center" }}>{r.assists}</span>

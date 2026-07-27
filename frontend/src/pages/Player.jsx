@@ -95,13 +95,13 @@ export default function Player() {
         </section>
         <section className="ps-card" style={{ flex: "1 1 340px", minWidth: 300 }}>
           <h2 className="ps-label" style={{ marginBottom: 14 }}>Tournament form · match ratings</h2>
-          <div style={{ display: "flex", alignItems: "flex-end", gap: 18, height: 130, padding: "0 6px" }}>
+          <div style={{ display: "flex", alignItems: "flex-end", gap: "clamp(6px, 2.4vw, 18px)", height: 130, padding: "0 6px" }}>
             {data.form.map((f) => (
-              <div key={f.opp} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, height: "100%", justifyContent: "flex-end" }}>
+              <div key={f.opp} style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, height: "100%", justifyContent: "flex-end" }}>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--chalk-60)" }}>{f.rating.toFixed(1)}</span>
                 <div
                   style={{
-                    width: 26,
+                    width: "clamp(18px, 5.5vw, 26px)",
                     height: Math.round((f.rating / 10) * 84),
                     background: f.rating >= 7.5 ? "var(--goalpost)" : "var(--gold)",
                     transformOrigin: "bottom",

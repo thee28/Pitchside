@@ -10,17 +10,15 @@ const dotColor = (q) => (q === "q" ? "var(--goalpost)" : q === "t" ? "var(--chal
 
 function HeroTeam({ team, champion }) {
   return (
-    <Link to={`/teams/${team.id}`} viewTransition style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--sp-2)" }}>
-      <span style={{ fontSize: 44, lineHeight: 1 }}>{team.flag}</span>
-      <span style={{ fontSize: "var(--text-sm)", fontWeight: champion ? 700 : 500, letterSpacing: "0.06em", color: champion ? "var(--ink)" : "var(--ink-60)" }}>
+    <Link to={`/teams/${team.id}`} viewTransition className="ps-hero-team">
+      <span className="ps-hero-flag">{team.flag}</span>
+      <span className={`ps-hero-name ${champion ? "ps-hero-name--win" : "ps-hero-name--lose"}`}>
         {team.name.toUpperCase()}
       </span>
       {champion ? (
-        <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", color: "var(--chalk)", padding: "3px 8px", backgroundColor: "var(--gold)" }}>
-          WORLD CHAMPIONS
-        </span>
+        <span className="ps-hero-badge">WORLD CHAMPIONS</span>
       ) : (
-        <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: "0.14em", color: "var(--ink-45)" }}>RUNNERS-UP</span>
+        <span className="ps-hero-badge ps-hero-badge--lose">RUNNERS-UP</span>
       )}
     </Link>
   );
@@ -41,7 +39,7 @@ function Hero({ hero }) {
       </div>
       <div className="ps-hero-teams">
         <HeroTeam team={hero.home} champion={hero.winner === hero.home.code} />
-        <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(48px,8vw,64px)", lineHeight: 1, color: "var(--ink)", letterSpacing: "0.05em" }}>
+        <div className="ps-hero-score">
           {hero.homeScore} – {hero.awayScore}
         </div>
         <HeroTeam team={hero.away} champion={hero.winner === hero.away.code} />
