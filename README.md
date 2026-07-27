@@ -63,7 +63,27 @@ Set these in the respective environments before deploying:
   comma-separated.
 - Frontend: `VITE_API_BASE` = the backend origin, when the built site is served
   from a different origin than the API. Leave unset if the API is same-origin
-  (e.g. behind a reverse proxy that routes `/api`).
+  (e.g. behind a reverse proxy that routes `/api`). Vite inlines this at build
+  time, so set it in the frontend host's env and redeploy after any change.
+
+### Live setup (Render backend + Vercel frontend)
+
+- Backend: Render Blueprint from [render.yaml](render.yaml) provisions the
+  Postgres + web service; build runs `alembic upgrade head` then
+  `python -m etl.load`. Set `CORS_ORIGINS` to the exact frontend origin, no
+  trailing slash (e.g. `https://pitchsidedata.app`).
+- Frontend: Vercel env var `VITE_API_BASE=https://pitchside-api.onrender.com`,
+  then redeploy.
+- Keep-warm: [.github/workflows/keepwarm.yml](.github/workflows/keepwarm.yml)
+  pings `/api/health` every 10 min so the free web service does not cold-start.
+  Update the URL there if the backend hostname changes.
+
+### Runbook
+
+- Refresh / re-seed data: redeploy the backend (build re-runs the ETL, which is
+  idempotent), or run `python -m etl.load` against the DB directly.
+- Free Render Postgres expires ~90 days, then is deleted. Data recovers from the
+  committed cache on redeploy, but the `DATABASE_URL` changes; re-link it.
 
 ## Design reference
 
