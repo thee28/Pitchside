@@ -537,8 +537,20 @@ button {
 }
 
 @keyframes psFadeIn {
+  from {
+    opacity: 0;
+  }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes psFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -587,7 +599,11 @@ button {
   justify-content: center;
   padding: clamp(12px, 5vh, 56px) var(--sp-4);
   overflow-y: auto;
-  animation: psFadeIn var(--dur-base) var(--ease-out);
+  animation: psFadeIn var(--dur-base) var(--ease-out) both;
+}
+
+.ps-modal-backdrop--closing {
+  animation: psFadeOut var(--dur-fast) var(--ease-out) both;
 }
 
 .ps-modal {
@@ -595,7 +611,11 @@ button {
   width: 100%;
   max-width: 900px;
   padding: 28px clamp(20px, 4vw, 34px) 32px;
-  animation: psModalPop var(--dur-slow) var(--ease-out);
+  animation: psModalPop var(--dur-slow) var(--ease-out) both;
+}
+
+.ps-modal-backdrop--closing .ps-modal {
+  animation: psModalPopOut var(--dur-fast) var(--ease-out) both;
 }
 
 .ps-modal-close {
@@ -627,6 +647,17 @@ button {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes psModalPopOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
   }
 }
 

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useFetch } from "../api";
 import Flag from "./Flag";
@@ -158,27 +158,33 @@ function Detail({ d }) {
 
 export default function MatchModal({ matchId, onClose }) {
   const { data, loading, error } = useFetch(`/api/matches/${matchId}`);
+  const [closing, setClosing] = useState(false);
+  const requestClose = () => {
+    if (closing) return;
+    setClosing(true);
+    setTimeout(onClose, 140);
+  };
 
   useEffect(() => {
-    const onKey = (e) => e.key === "Escape" && onClose();
+    const onKey = (e) => e.key === "Escape" && requestClose();
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, []);
 
   return createPortal(
     <div
-      className="ps-modal-backdrop"
-      onClick={onClose}
+      className={`ps-modal-backdrop${closing ? " ps-modal-backdrop--closing" : ""}`}
+      onClick={requestClose}
       role="dialog"
       aria-modal="true"
       aria-label="Match detail"
     >
       <div className="ps-modal ps-card--light ps-light" onClick={(e) => e.stopPropagation()}>
-        <button className="ps-modal-close" onClick={onClose} aria-label="Close">×</button>
+        <button className="ps-modal-close" onClick={requestClose} aria-label="Close">×</button>
         {loading && <div style={{ padding: "40px 0", textAlign: "center", color: "var(--ink-60)" }}>Loading…</div>}
         {error && <div style={{ padding: "40px 0", textAlign: "center", color: "var(--ink-60)" }}>Couldn’t load this match.</div>}
         {data && <Detail d={data} />}
