@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFetch } from "../api";
 import { ErrorBox, Loading, PageShell } from "../components/Page";
 import MatchModal from "../components/MatchModal";
+import Flag from "../components/Flag";
 
 const KINDS = {
   def: {
@@ -47,13 +48,13 @@ function MatchCard({ m, onOpen }) {
       style={{ padding: "10px 12px", textAlign: "left", width: "100%", display: "block" }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "2px 0" }}>
-        <span style={{ fontSize: 14, lineHeight: 1 }}>{m.fa}</span>
+        <Flag code={m.fa} size={14} />
         <span style={teamStyle(aWin)}>{m.ca}</span>
         <span style={{ flex: 1 }} />
         <span style={scoreStyle(aWin)}>{m.sa}</span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "2px 0" }}>
-        <span style={{ fontSize: 14, lineHeight: 1 }}>{m.fb}</span>
+        <Flag code={m.fb} size={14} />
         <span style={teamStyle(!aWin)}>{m.cb}</span>
         <span style={{ flex: 1 }} />
         <span style={scoreStyle(!aWin)}>{m.sb}</span>

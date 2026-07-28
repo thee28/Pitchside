@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFetch } from "../api";
 import { ErrorBox, Loading } from "../components/Page";
+import Flag from "../components/Flag";
 import { initials } from "../theme";
 
 const dotColor = (q) => (q === "q" ? "var(--goalpost)" : q === "t" ? "var(--chalk-border)" : "var(--elim-dot)");
@@ -136,7 +137,7 @@ export default function TeamProfile() {
             <span className="ps-link-arrow">←</span> All teams
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap", marginTop: 14 }}>
-            <span style={{ fontSize: 48, lineHeight: 1 }}>{data.flag}</span>
+            <Flag code={data.flag} size={48} />
             <div>
               <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px,5vw,40px)", lineHeight: 1, letterSpacing: "0.04em", color: ink, fontWeight: 400 }}>
                 {data.name.toUpperCase()}
@@ -165,7 +166,7 @@ export default function TeamProfile() {
             {data.groupRows.map((r) => (
               <div key={r.code} style={{ display: "flex", alignItems: "center", gap: "var(--sp-2)", padding: "9px 0", borderTop: "0.5px solid var(--chalk-rule)", fontSize: "var(--text-sm)", color: "var(--goalpost)" }}>
                 <span style={{ width: 4, height: 4, borderRadius: "50%", background: dotColor(r.q), flex: "0 0 auto" }} />
-                <span style={{ fontSize: 15, lineHeight: 1 }}>{r.flag}</span>
+                <Flag code={r.flag} size={15} />
                 <span style={{ fontWeight: 500 }}>{r.name}</span>
                 <span style={{ flex: 1 }} />
                 <span style={{ fontFamily: "var(--font-mono)", color: "var(--chalk-60)" }}>{r.gd} GD</span>

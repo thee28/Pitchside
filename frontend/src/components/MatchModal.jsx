@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useFetch } from "../api";
+import Flag from "./Flag";
 
 // Rating pill colour tiers, tuned for the cream card background.
 function ratingStyle(r) {
@@ -44,7 +45,7 @@ function LineupColumn({ team, players }) {
   return (
     <div style={{ flex: "1 1 260px", minWidth: 240 }}>
       <div style={{ display: "flex", alignItems: "center", gap: "var(--sp-2)", marginBottom: 4 }}>
-        <span style={{ fontSize: 16, lineHeight: 1 }}>{team.flag}</span>
+        <Flag code={team.flag} size={16} />
         <span style={{ fontSize: "var(--text-sm)", fontWeight: 700, letterSpacing: "0.05em", color: "var(--ink)" }}>{team.name.toUpperCase()}</span>
       </div>
       {starters.map((p) => (
@@ -87,7 +88,7 @@ function Detail({ d }) {
 
       <div className="ps-hero-teams" style={{ marginTop: "var(--sp-4)" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--sp-2)" }}>
-          <span style={{ fontSize: 40, lineHeight: 1 }}>{d.home.flag}</span>
+          <Flag code={d.home.flag} size={40} />
           <span style={teamNameStyle(homeWin)}>{d.home.name.toUpperCase()}</span>
         </div>
         <div style={{ textAlign: "center" }}>
@@ -101,7 +102,7 @@ function Detail({ d }) {
           )}
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--sp-2)" }}>
-          <span style={{ fontSize: 40, lineHeight: 1 }}>{d.away.flag}</span>
+          <Flag code={d.away.flag} size={40} />
           <span style={teamNameStyle(awayWin)}>{d.away.name.toUpperCase()}</span>
         </div>
       </div>

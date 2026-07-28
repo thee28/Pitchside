@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFetch } from "../api";
 import { ErrorBox, Loading, PageShell } from "../components/Page";
+import Flag from "../components/Flag";
 
 const SPECIAL_FATES = new Set(["World Champions", "Runners-up", "Third place", "Fourth place"]);
 const GROUPS = "ABCDEFGHIJKL".split("");
@@ -11,7 +12,7 @@ const dotColor = (q) => (q === "q" ? "var(--goalpost)" : q === "t" ? "var(--chal
 function HeroTeam({ team, champion }) {
   return (
     <Link to={`/teams/${team.id}`} viewTransition className="ps-hero-team">
-      <span className="ps-hero-flag">{team.flag}</span>
+      <Flag code={team.flag} size={null} className="ps-hero-flag" />
       <span className={`ps-hero-name ${champion ? "ps-hero-name--win" : "ps-hero-name--lose"}`}>
         {team.name.toUpperCase()}
       </span>
@@ -118,7 +119,7 @@ function Standings({ groups }) {
         <div key={r.code} style={{ ...grid, borderTop: "0.5px solid var(--chalk-rule)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "var(--sp-2)", padding: "9px 0", fontSize: "var(--text-sm)", color: "var(--goalpost)" }}>
             <span style={{ width: 4, height: 4, borderRadius: "50%", background: dotColor(r.q), flex: "0 0 auto" }} />
-            <span style={{ fontSize: 15, lineHeight: 1 }}>{r.flag}</span>
+            <Flag code={r.flag} size={15} />
             <span style={{ fontWeight: 500 }}>{r.name}</span>
           </div>
           <div style={cell}>{r.p}</div>
@@ -133,7 +134,7 @@ function Standings({ groups }) {
         <h2 className="ps-label">Knockout run</h2>
         {runs.map((k) => (
           <div key={k.code} style={{ display: "flex", alignItems: "center", gap: "var(--sp-3)", padding: "11px 0", borderBottom: "0.5px solid var(--chalk-rule-soft)" }}>
-            <span style={{ fontSize: 15, lineHeight: 1 }}>{k.flag}</span>
+            <Flag code={k.flag} size={15} />
             <span style={{ fontSize: "var(--text-md)", fontWeight: 500, color: "var(--goalpost)" }}>{k.name}</span>
             <span style={{ flex: 1, borderBottom: "1px dotted var(--chalk-rule)", margin: "0 4px" }} />
             <span
@@ -171,9 +172,9 @@ function KnockoutResults({ koResults }) {
       <h2 className="ps-label" style={{ marginBottom: 6 }}>Knockout results</h2>
       {koResults.map((u) => (
         <div key={u.teams} style={{ display: "flex", alignItems: "center", gap: "var(--sp-3)", padding: "11px 0", borderBottom: "0.5px solid var(--chalk-rule)" }}>
-          <span style={{ fontSize: 15, lineHeight: 1 }}>{u.fa}</span>
+          <Flag code={u.fa} size={15} />
           <span style={{ fontSize: "var(--text-md)", fontWeight: 500, color: "var(--goalpost)" }}>{u.teams}</span>
-          <span style={{ fontSize: 15, lineHeight: 1 }}>{u.fb}</span>
+          <Flag code={u.fb} size={15} />
           <span style={{ fontSize: "var(--text-2xs)", fontWeight: 500, letterSpacing: "0.04em", color: "var(--goalpost)", background: "var(--chalk-fill)", padding: "2px 6px" }}>
             {u.stage}
           </span>

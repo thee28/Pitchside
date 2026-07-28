@@ -432,8 +432,8 @@ button {
   max-width: 42%;
 }
 .ps-hero-flag {
-  font-size: clamp(34px, 10vw, 44px);
-  line-height: 1;
+  width: clamp(45px, 13.3vw, 59px);
+  height: clamp(34px, 10vw, 44px);
 }
 .ps-hero-name {
   font-size: clamp(11px, 3.4vw, var(--text-sm));

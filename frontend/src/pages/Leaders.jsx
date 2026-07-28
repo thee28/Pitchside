@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../api";
 import { ErrorBox, Loading, PageShell } from "../components/Page";
+import Flag from "../components/Flag";
 import { initials } from "../theme";
 
 const MEDALS = ["var(--gold)", "var(--silver)", "var(--bronze)"];
@@ -40,8 +41,8 @@ function Podium({ p, medal }) {
       </span>
       <span style={{ flex: 1, minWidth: 0 }}>
         <span style={{ display: "block", fontSize: "var(--text-base)", fontWeight: 500, color: "var(--chalk)" }}>{p.name}</span>
-        <span style={{ display: "block", fontSize: "var(--text-xs)", color: "var(--chalk-60)", marginTop: 1 }}>
-          {p.flag} {p.teamName}
+        <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "var(--text-xs)", color: "var(--chalk-60)", marginTop: 1 }}>
+          <Flag code={p.flag} size={11} /> {p.teamName}
         </span>
       </span>
       <span style={{ textAlign: "right" }}>
@@ -60,7 +61,7 @@ function BoardRow({ r }) {
     <button className="ps-row-btn" onClick={() => navigate(`/players/${r.id}`, { viewTransition: true })} style={{ ...boardGrid, padding: "9px 0" }}>
       <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", color: "var(--chalk-60)" }}>{r.rank}</span>
       <span style={{ display: "flex", alignItems: "center", gap: 9, minWidth: 0, overflow: "hidden" }}>
-        <span style={{ fontSize: 15, lineHeight: 1, flex: "0 0 auto" }}>{r.flag}</span>
+        <Flag code={r.flag} size={15} />
         <span style={{ fontSize: "var(--text-sm)", fontWeight: 500, color: "var(--goalpost)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", flex: "1 1 auto", minWidth: 0 }}>
           {r.name}
         </span>
@@ -107,7 +108,7 @@ export default function Leaders() {
             <h2 className="ps-label" style={{ marginBottom: 6 }}>Most assists</h2>
             {data.assists.map((a) => (
               <div key={a.name} style={{ display: "flex", alignItems: "center", gap: 9, padding: "9px 0", borderBottom: "0.5px solid var(--chalk-rule)" }}>
-                <span style={{ fontSize: 15, lineHeight: 1 }}>{a.flag}</span>
+                <Flag code={a.flag} size={15} />
                 <span style={{ fontSize: "var(--text-sm)", fontWeight: 500, color: "var(--goalpost)" }}>{a.name}</span>
                 <span style={{ flex: 1 }} />
                 <span className="ps-display" style={{ fontSize: "var(--display-sm)" }}>{a.n}</span>
@@ -118,7 +119,7 @@ export default function Leaders() {
             <h2 className="ps-label ps-label--ink" style={{ fontSize: "var(--text-2xs)", letterSpacing: "0.08em" }}>Tournament awards</h2>
             {data.awards.map((aw) => (
               <div key={aw.award} style={{ display: "flex", alignItems: "center", gap: "var(--sp-3)", padding: "10px 0", borderBottom: "1px solid var(--ink-rule)" }}>
-                <span style={{ fontSize: 15, lineHeight: 1 }}>{aw.flag}</span>
+                <Flag code={aw.flag} size={15} />
                 <span>
                   <span style={{ display: "block", fontSize: "var(--text-md)", fontWeight: 700, color: "var(--ink)" }}>{aw.name}</span>
                   <span style={{ display: "block", fontSize: "var(--text-2xs)", fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--ink-60)", marginTop: 1 }}>

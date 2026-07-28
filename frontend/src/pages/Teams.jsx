@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../api";
 import { ErrorBox, Loading, PageShell } from "../components/Page";
+import Flag from "../components/Flag";
 
 function TeamCard({ card }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function TeamCard({ card }) {
       ].join(" ")}
       style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left", padding: "var(--sp-5)" }}
     >
-      <span style={{ fontSize: 34, lineHeight: 1 }}>{card.flag}</span>
+      <Flag code={card.flag} size={34} />
       <span style={{ fontFamily: "var(--font-display)", fontSize: 24, letterSpacing: "0.04em", color: "var(--chalk)", marginTop: "var(--sp-3)" }}>
         {card.name.toUpperCase()}
       </span>

@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../api";
 import { ErrorBox, Loading, PageShell } from "../components/Page";
+import Flag from "../components/Flag";
 import { initials } from "../theme";
 
 export default function Player() {
@@ -45,7 +46,7 @@ export default function Player() {
             {data.name}
           </h1>
           <div style={{ display: "flex", alignItems: "center", gap: "var(--sp-2)", fontSize: "var(--text-sm)", color: "var(--chalk-60)", marginTop: 5 }}>
-            <span style={{ fontSize: 15, lineHeight: 1 }}>{data.flag}</span>
+            <Flag code={data.flag} size={15} />
             <span>{data.teamName}</span>
             <span>·</span>
             <span>{data.pos}</span>
