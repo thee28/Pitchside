@@ -228,6 +228,29 @@ export default function TeamProfile() {
             </div>
           </div>
         )}
+
+        {data.roster.length > 0 && (
+          <section className="ps-card" style={{ marginTop: "var(--sp-5)" }}>
+            <h2 className="ps-label" style={{ marginBottom: "var(--sp-3)" }}>Squad</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", columnGap: "var(--sp-5)" }}>
+              {data.roster.map((p, i) => (
+                <div
+                  key={`${p.name}-${i}`}
+                  style={{ display: "flex", alignItems: "center", gap: "var(--sp-2)", padding: "9px 0", borderTop: "0.5px solid var(--chalk-rule)", fontSize: "var(--text-sm)", color: "var(--goalpost)" }}
+                >
+                  <span style={{ fontFamily: "var(--font-mono)", color: "var(--chalk-60)", width: 22, flex: "0 0 auto", textAlign: "right" }}>
+                    {p.number ?? "—"}
+                  </span>
+                  <span style={{ fontWeight: 500 }}>{p.name}</span>
+                  <span style={{ flex: 1 }} />
+                  <span style={{ fontSize: "var(--text-2xs)", fontWeight: 500, letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--chalk-60)", flex: "0 0 auto" }}>
+                    {p.pos}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

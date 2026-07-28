@@ -23,6 +23,7 @@ class Team(Base):
     bars: Mapped[list | None] = mapped_column(JSONB)
     has_profile: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     card_order: Mapped[int | None] = mapped_column(Integer)
+    roster: Mapped[list | None] = mapped_column(JSONB)
 
 
 class GroupStanding(Base):

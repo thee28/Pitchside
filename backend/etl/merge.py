@@ -25,6 +25,7 @@ Everything is read from the on-disk cache, so a merge run makes zero API calls.
 import json
 import re
 import unicodedata
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
@@ -573,12 +574,51 @@ _FATE_ORDER = {
     "Quarter-finals": 4, "Round of 16": 5, "Round of 32": 6, "Group stage": 7,
 }
 
+# Squad list position code -> display label (see build_rosters).
+POS_LABEL = {"G": "Goalkeeper", "D": "Defender", "M": "Midfielder", "F": "Forward"}
+_POS_RANK = {"Goalkeeper": 0, "Defender": 1, "Midfielder": 2, "Forward": 3}
+
+
+def build_rosters(id2code: dict[int, str]) -> dict[str, list[dict]]:
+    """code -> full matchday squad [{name, number, pos}], deduped across every
+    fixture the side played (each cached fixture lists all ~26 called-up
+    players, starters and unused subs alike, with squad number + position)."""
+    by_code: dict[str, dict[int, dict]] = {}
+    for f in sorted((CACHE / "fixtures_players").glob("*.json")):
+        for block in json.loads(f.read_text()).get("response", []):
+            code = id2code.get(block["team"]["id"])
+            if code is None:
+                continue
+            players = by_code.setdefault(code, {})
+            for pl in block.get("players", []):
+                pid = pl["player"]["id"]
+                g = pl["statistics"][0]["games"]
+                entry = players.setdefault(
+                    pid, {"name": pl["player"]["name"], "numbers": Counter(), "positions": Counter()}
+                )
+                if g.get("number"):
+                    entry["numbers"][g["number"]] += 1
+                if g.get("position"):
+                    entry["positions"][g["position"]] += 1
+
+    out = {}
+    for code, players in by_code.items():
+        rows = []
+        for e in players.values():
+            number = e["numbers"].most_common(1)[0][0] if e["numbers"] else None
+            pos_letter = e["positions"].most_common(1)[0][0] if e["positions"] else None
+            rows.append({"name": e["name"], "number": number, "pos": POS_LABEL.get(pos_letter, "—")})
+        rows.sort(key=lambda r: (_POS_RANK.get(r["pos"], 4), r["number"] if r["number"] is not None else 999))
+        out[code] = rows
+    return out
+
 
 def merge_teams(editorial: dict, matches: list[dict], id2code: dict, id2name: dict) -> list:
     fates = compute_fates(matches)
     metrics = team_metrics(matches, id2code)
     radars = compute_radars(id2code)
     points = {r["team_code"]: r["points"] for r in merge_standings(editorial, id2code)}
+    rosters = build_rosters(id2code)
 
     merged_all = []
     for t in editorial["teams"]:
@@ -592,6 +632,7 @@ def merge_teams(editorial: dict, matches: list[dict], id2code: dict, id2name: di
         m["bars"] = _team_bars(metrics.get(code), t["bars"])
         m["radar"] = radars.get(code) or t.get("radar") or [68] * 6
         m["has_profile"] = True  # every team is now clickable
+        m["roster"] = rosters.get(code, [])
         merged_all.append(m)
 
     # Assign a stable grid order by how far each side went, champions first.

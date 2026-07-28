@@ -32,7 +32,7 @@ CONFLICT_KEYS = {
     "tournament_stats": ["label"],
 }
 
-JSONB_COLS = {"radar", "bars"}
+JSONB_COLS = {"radar", "bars", "roster"}
 
 
 def build_frames(raw: dict) -> dict[str, pd.DataFrame]:

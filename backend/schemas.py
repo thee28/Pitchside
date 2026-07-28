@@ -86,6 +86,12 @@ class KeyPlayer(BaseModel):
     rating: float
 
 
+class RosterEntry(BaseModel):
+    name: str
+    number: int | None
+    pos: str
+
+
 class TeamProfileResponse(BaseModel):
     id: str
     code: str
@@ -100,6 +106,7 @@ class TeamProfileResponse(BaseModel):
     groupRows: list[StandingRow]
     matches: list[TeamMatch]
     keyPlayers: list[KeyPlayer]
+    roster: list[RosterEntry]
 
 
 class FormPoint(BaseModel):

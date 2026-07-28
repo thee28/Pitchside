@@ -135,4 +135,5 @@ async def team_profile(team_id: str, session: AsyncSession = Depends(get_session
             }
             for p in key_players
         ],
+        "roster": team.roster or [],
     }
