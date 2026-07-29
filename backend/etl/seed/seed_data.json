@@ -2658,7 +2658,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 0
+      "key_player_order": null
     },
     {
       "id": "mora",
@@ -2714,7 +2714,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 1
+      "key_player_order": null
     },
     {
       "id": "alvarezE",
@@ -2725,15 +2725,15 @@
       "position": "Midfielder",
       "number": 4,
       "goals": 0,
-      "assists": 1,
-      "rating": 7.5,
-      "minutes": 450,
+      "assists": 0,
+      "rating": 7.0,
+      "minutes": 252,
       "note": null,
       "bars": [
         [
           "Shot accuracy",
-          "42%",
-          42
+          "0%",
+          0
         ],
         [
           "Pass accuracy",
@@ -2742,27 +2742,27 @@
         ],
         [
           "Dribble success",
-          "46%",
-          46
+          "100%",
+          100
         ],
         [
           "Duels won",
-          "72%",
-          72
+          "64%",
+          64
         ]
       ],
       "form": [
+        [
+          "RSA",
+          7.0
+        ],
         [
           "KOR",
           7.2
         ],
         [
           "CZE",
-          7.6
-        ],
-        [
-          "ECU",
-          7.8
+          6.6
         ],
         [
           "ENG",
@@ -2781,7 +2781,7 @@
       "position": "Right back",
       "number": 2,
       "goals": 1,
-      "assists": 3,
+      "assists": 2,
       "rating": 8.0,
       "minutes": 570,
       "note": null,
@@ -2838,47 +2838,47 @@
       "number": 5,
       "goals": 1,
       "assists": 0,
-      "rating": 7.6,
-      "minutes": 557,
+      "rating": 6.9,
+      "minutes": 477,
       "note": null,
       "bars": [
         [
           "Shot accuracy",
-          "48%",
-          48
+          "100%",
+          100
         ],
         [
           "Pass accuracy",
-          "89%",
-          89
+          "88%",
+          88
         ],
         [
           "Dribble success",
-          "35%",
-          35
+          "0%",
+          0
         ],
         [
           "Duels won",
-          "74%",
-          74
+          "55%",
+          55
         ]
       ],
       "form": [
         [
           "SCO",
-          7.4
-        ],
-        [
-          "HAI",
-          7.2
+          6.9
         ],
         [
           "NED",
-          8.5
+          7.3
         ],
         [
           "CAN",
-          7.9
+          7.3
+        ],
+        [
+          "FRA",
+          6.5
         ]
       ],
       "board_rank": null,
@@ -5902,7 +5902,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 0
+      "key_player_order": 1
     },
     {
       "id": "cabral",
@@ -5954,7 +5954,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 1
+      "key_player_order": 2
     },
     {
       "id": "sarr",
@@ -6326,7 +6326,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 0
+      "key_player_order": 1
     },
     {
       "id": "oh",
@@ -6365,20 +6365,20 @@
       ],
       "form": [
         [
-          "CZE",
-          7.3
-        ],
-        [
           "MEX",
           6.2
         ],
         [
           "RSA",
           6.5
+        ],
+        [
+          "CZE",
+          7.3
         ]
       ],
       "board_rank": null,
-      "key_player_order": 1
+      "key_player_order": 2
     },
     {
       "id": "ylmaz",
@@ -6534,7 +6534,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 0
+      "key_player_order": 1
     },
     {
       "id": "abdulhamid",
@@ -6586,7 +6586,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 1
+      "key_player_order": 2
     },
     {
       "id": "arajo",
@@ -6742,7 +6742,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 0
+      "key_player_order": 1
     },
     {
       "id": "floranus",
@@ -6794,7 +6794,7 @@
         ]
       ],
       "board_rank": null,
-      "key_player_order": 1
+      "key_player_order": 2
     },
     {
       "id": "krej",
@@ -7715,6 +7715,386 @@
       ],
       "board_rank": null,
       "key_player_order": 1
+    },
+    {
+      "id": "quinones",
+      "name": "Julián Quiñones",
+      "flag": "mx",
+      "team_code": "MEX",
+      "team_id": "mex",
+      "position": "Forward",
+      "number": 16,
+      "goals": 4,
+      "assists": 1,
+      "rating": 7.8,
+      "minutes": 414,
+      "note": null,
+      "bars": [
+        [
+          "Shot accuracy",
+          "55%",
+          55
+        ],
+        [
+          "Pass accuracy",
+          "82%",
+          82
+        ],
+        [
+          "Dribble success",
+          "67%",
+          67
+        ],
+        [
+          "Duels won",
+          "44%",
+          44
+        ]
+      ],
+      "form": [
+        [
+          "KOR",
+          6.7
+        ],
+        [
+          "CZE",
+          7.2
+        ],
+        [
+          "ECU",
+          8.3
+        ],
+        [
+          "ENG",
+          7.9
+        ]
+      ],
+      "board_rank": null,
+      "key_player_order": 0
+    },
+    {
+      "id": "jimenez",
+      "name": "Raúl Jiménez",
+      "flag": "mx",
+      "team_code": "MEX",
+      "team_id": "mex",
+      "position": "Forward",
+      "number": 9,
+      "goals": 3,
+      "assists": 0,
+      "rating": 7.3,
+      "minutes": 333,
+      "note": null,
+      "bars": [
+        [
+          "Shot accuracy",
+          "50%",
+          50
+        ],
+        [
+          "Pass accuracy",
+          "66%",
+          66
+        ],
+        [
+          "Dribble success",
+          "0%",
+          0
+        ],
+        [
+          "Duels won",
+          "50%",
+          50
+        ]
+      ],
+      "form": [
+        [
+          "RSA",
+          7.7
+        ],
+        [
+          "KOR",
+          6.5
+        ],
+        [
+          "ECU",
+          7.7
+        ],
+        [
+          "ENG",
+          7.2
+        ]
+      ],
+      "board_rank": null,
+      "key_player_order": 1
+    },
+    {
+      "id": "vozinha",
+      "name": "Vozinha",
+      "flag": "cv",
+      "team_code": "CPV",
+      "team_id": "cpv",
+      "position": "Goalkeeper",
+      "number": 1,
+      "goals": 0,
+      "assists": 0,
+      "rating": 7.9,
+      "minutes": 390,
+      "note": null,
+      "bars": [
+        [
+          "Save accuracy",
+          "78%",
+          78
+        ],
+        [
+          "Pass accuracy",
+          "66%",
+          66
+        ],
+        [
+          "Duels won",
+          "100%",
+          100
+        ],
+        [
+          "Minutes played",
+          "390",
+          100
+        ]
+      ],
+      "form": [
+        [
+          "ESP",
+          9.6
+        ],
+        [
+          "URU",
+          5.9
+        ],
+        [
+          "KSA",
+          7.5
+        ],
+        [
+          "ARG",
+          8.5
+        ]
+      ],
+      "board_rank": null,
+      "key_player_order": 0
+    },
+    {
+      "id": "son",
+      "name": "Son Heung-min",
+      "flag": "kr",
+      "team_code": "KOR",
+      "team_id": "kor",
+      "position": "Forward",
+      "number": 7,
+      "goals": 0,
+      "assists": 0,
+      "rating": 6.7,
+      "minutes": 171,
+      "note": null,
+      "bars": [
+        [
+          "Shot accuracy",
+          "33%",
+          33
+        ],
+        [
+          "Pass accuracy",
+          "83%",
+          83
+        ],
+        [
+          "Dribble success",
+          "75%",
+          75
+        ],
+        [
+          "Duels won",
+          "73%",
+          73
+        ]
+      ],
+      "form": [
+        [
+          "MEX",
+          6.9
+        ],
+        [
+          "RSA",
+          6.3
+        ],
+        [
+          "CZE",
+          6.9
+        ]
+      ],
+      "board_rank": null,
+      "key_player_order": 0
+    },
+    {
+      "id": "saibari",
+      "name": "Ismael Saibari",
+      "flag": "ma",
+      "team_code": "MAR",
+      "team_id": "mar",
+      "position": "Midfielder",
+      "number": 11,
+      "goals": 3,
+      "assists": 0,
+      "rating": 7.0,
+      "minutes": 385,
+      "note": null,
+      "bars": [
+        [
+          "Shot accuracy",
+          "50%",
+          50
+        ],
+        [
+          "Pass accuracy",
+          "84%",
+          84
+        ],
+        [
+          "Dribble success",
+          "57%",
+          57
+        ],
+        [
+          "Duels won",
+          "42%",
+          42
+        ]
+      ],
+      "form": [
+        [
+          "SCO",
+          7.9
+        ],
+        [
+          "HAI",
+          7.2
+        ],
+        [
+          "NED",
+          5.9
+        ],
+        [
+          "CAN",
+          6.3
+        ]
+      ],
+      "board_rank": null,
+      "key_player_order": 1
+    },
+    {
+      "id": "room",
+      "name": "Eloy Room",
+      "flag": "cw",
+      "team_code": "CUR",
+      "team_id": "cur",
+      "position": "Goalkeeper",
+      "number": 1,
+      "goals": 0,
+      "assists": 0,
+      "rating": 7.2,
+      "minutes": 270,
+      "note": null,
+      "bars": [
+        [
+          "Save accuracy",
+          "69%",
+          69
+        ],
+        [
+          "Pass accuracy",
+          "51%",
+          51
+        ],
+        [
+          "Duels won",
+          "0%",
+          0
+        ],
+        [
+          "Minutes played",
+          "270",
+          100
+        ]
+      ],
+      "form": [
+        [
+          "GER",
+          5.0
+        ],
+        [
+          "ECU",
+          10.0
+        ],
+        [
+          "CIV",
+          6.7
+        ]
+      ],
+      "board_rank": null,
+      "key_player_order": 0
+    },
+    {
+      "id": "alowais",
+      "name": "Mohammed Al-Owais",
+      "flag": "sa",
+      "team_code": "KSA",
+      "team_id": "ksa",
+      "position": "Goalkeeper",
+      "number": 21,
+      "goals": 0,
+      "assists": 0,
+      "rating": 7.4,
+      "minutes": 270,
+      "note": null,
+      "bars": [
+        [
+          "Save accuracy",
+          "76%",
+          76
+        ],
+        [
+          "Pass accuracy",
+          "56%",
+          56
+        ],
+        [
+          "Duels won",
+          "100%",
+          100
+        ],
+        [
+          "Minutes played",
+          "270",
+          100
+        ]
+      ],
+      "form": [
+        [
+          "URU",
+          7.7
+        ],
+        [
+          "ESP",
+          7.2
+        ],
+        [
+          "CPV",
+          7.2
+        ]
+      ],
+      "board_rank": null,
+      "key_player_order": 0
     }
   ],
   "awards": [
