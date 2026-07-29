@@ -6,12 +6,14 @@ const LINKS = [
   ["Teams", "/teams"],
   ["Players", "/leaders"],
   ["Bracket", "/bracket"],
+  ["Stadiums", "/stadiums"],
 ];
 
 function activePath(pathname) {
   if (pathname.startsWith("/teams")) return "/teams";
   if (pathname.startsWith("/players") || pathname.startsWith("/leaders")) return "/leaders";
   if (pathname.startsWith("/bracket")) return "/bracket";
+  if (pathname.startsWith("/stadiums")) return "/stadiums";
   return "/";
 }
 

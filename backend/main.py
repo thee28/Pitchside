@@ -6,7 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from routers import bracket, home, leaders, matches, players, teams
+from routers import bracket, home, leaders, matches, players, stadiums, teams
 
 # The interactive docs describe an API that is public, read-only and static, so
 # they leak nothing exploitable — but they are pure attack-surface for scrapers,
@@ -26,6 +26,7 @@ app.include_router(players.router)
 app.include_router(bracket.router)
 app.include_router(leaders.router)
 app.include_router(matches.router)
+app.include_router(stadiums.router)
 
 # Per-IP request cap. A visitor browsing hard fires a handful of calls per page,
 # so this only ever bites scrapers and runaway loops. In-process and per-worker,

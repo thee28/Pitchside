@@ -107,6 +107,29 @@ class Award(Base):
     detail: Mapped[str] = mapped_column(String(64), nullable=False)
 
 
+class Stadium(Base):
+    __tablename__ = "stadiums"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    # The name FIFA used during the tournament (sponsor-free), e.g.
+    # "New York New Jersey Stadium"; local_name is what the venue is called
+    # the rest of the year, e.g. "MetLife Stadium".
+    fifa_name: Mapped[str] = mapped_column(String(64), nullable=False)
+    local_name: Mapped[str] = mapped_column(String(64), nullable=False)
+    city: Mapped[str] = mapped_column(String(64), nullable=False)
+    region: Mapped[str] = mapped_column(String(64), nullable=False)
+    country: Mapped[str] = mapped_column(String(32), nullable=False)
+    flag: Mapped[str] = mapped_column(String(16), nullable=False)
+    capacity: Mapped[int] = mapped_column(Integer, nullable=False)
+    opened: Mapped[int] = mapped_column(Integer, nullable=False)
+    roof: Mapped[str | None] = mapped_column(String(32))
+    blurb: Mapped[str | None] = mapped_column(Text)
+    # Derived from the fixture list by the ETL, not editorial.
+    matches_hosted: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    stages: Mapped[list | None] = mapped_column(JSONB)
+    sort: Mapped[int] = mapped_column(Integer, nullable=False)
+
+
 class TournamentStat(Base):
     __tablename__ = "tournament_stats"
 

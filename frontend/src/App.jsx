@@ -6,6 +6,7 @@ import TeamProfile from "./pages/TeamProfile";
 import Player from "./pages/Player";
 import Bracket from "./pages/Bracket";
 import Leaders from "./pages/Leaders";
+import Stadiums from "./pages/Stadiums";
 import { ErrorBox } from "./components/Page";
 import { useFetch } from "./api";
 
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
       { path: "/players/:id", element: <Player /> },
       { path: "/bracket", element: <Bracket /> },
       { path: "/leaders", element: <Leaders /> },
+      { path: "/stadiums", element: <Stadiums /> },
       { path: "*", element: <ErrorBox error={new Error("404")} /> },
     ],
   },

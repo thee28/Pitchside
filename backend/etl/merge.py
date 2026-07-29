@@ -45,6 +45,42 @@ ROUND_TO_STAGE = {
     "Final": "FINAL",
 }
 
+# Fixture venue name -> stadium id in the editorial seed. The API spells a few
+# venues more than one way across the 104 fixtures (city suffixes, the odd
+# tournament name), so several keys can point at the same stadium.
+VENUE_TO_STADIUM = {
+    "Arrowhead Stadium": "kansas-city",
+    "AT&T Stadium": "dallas",
+    "BC Place": "vancouver",
+    "BMO Field": "toronto",
+    "Dallas Stadium": "dallas",
+    "Estadio Akron": "guadalajara",
+    "Estadio Banorte": "mexico-city",
+    "Estadio BBVA": "monterrey",
+    "Gillette Stadium": "boston",
+    "Hard Rock Stadium": "miami",
+    "Hard Rock Stadium, Miami Garden": "miami",
+    "Levi's Stadium": "san-francisco-bay-area",
+    "Lincoln Financial Field": "philadelphia",
+    "Lumen Field": "seattle",
+    "Mercedes-Benz Stadium": "atlanta",
+    "MetLife Stadium": "new-york-new-jersey",
+    "NRG Stadium": "houston",
+    "SoFi Stadium": "los-angeles",
+}
+
+# Display order for a venue's hosted-stage list: deepest round first, the
+# group stage (collapsed from the twelve GROUP x labels) last.
+STAGE_DEPTH = {
+    "FINAL": 0,
+    "THIRD PLACE": 1,
+    "SEMI-FINAL": 2,
+    "QUARTER-FINAL": 3,
+    "ROUND OF 16": 4,
+    "ROUND OF 32": 5,
+    "GROUP STAGE": 6,
+}
+
 # Fate label by the deepest stage a side reached and how it left it.
 FATE_BY_STAGE = {
     "ROUND OF 32": "Round of 32",
@@ -779,6 +815,33 @@ def merge_awards(editorial: dict, agg_by_name: dict, keepers: dict, id2code: dic
     return awards
 
 
+def merge_stadiums(editorial: dict, matches: list[dict]) -> list:
+    """Editorial venue facts + the match load computed from the fixture list.
+
+    The seed owns everything the API has no concept of (FIFA tournament name,
+    capacity, opening year, blurb); `matches_hosted` and `stages` are derived,
+    so a venue can never be credited with a match it did not stage.
+    """
+    hosted: dict[str, list[str]] = {}
+    for m in matches:
+        name = m["_venue_long"]
+        sid = VENUE_TO_STADIUM.get(name)
+        if sid is None:
+            raise ValueError(f"unmapped fixture venue: {name!r}")
+        stage = "GROUP STAGE" if m["stage"].startswith("GROUP") else m["stage"]
+        hosted.setdefault(sid, []).append(stage)
+
+    rows = []
+    for s in editorial["stadiums"]:
+        stages = hosted.get(s["id"], [])
+        row = dict(s)
+        row["matches_hosted"] = len(stages)
+        # Deepest-first, so the headline stage a venue reached reads first.
+        row["stages"] = sorted(set(stages), key=lambda st: STAGE_DEPTH[st])
+        rows.append(row)
+    return rows
+
+
 def merge_tournament_stats(matches: list[dict]) -> list:
     played = len(matches)
     goals = sum((m["home_score"] or 0) + (m["away_score"] or 0) for m in matches)
@@ -813,6 +876,7 @@ def build_merged() -> dict:
         "players": players,
         "awards": awards,
         "tournament_stats": merge_tournament_stats(matches),
+        "stadiums": merge_stadiums(editorial, matches),
     }
 
 

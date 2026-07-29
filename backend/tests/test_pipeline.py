@@ -23,6 +23,7 @@ def test_row_counts(merged):
     assert len(merged["standings"]) == 48
     assert len(merged["matches"]) == 104
     assert len(merged["awards"]) == 3
+    assert len(merged["stadiums"]) == 16
     assert merged["players"], "no players merged"
 
 
@@ -67,6 +68,23 @@ def test_awards_populated(merged):
     for a in merged["awards"]:
         assert a["player_name"], a
         assert a["detail"], a
+
+
+def test_stadiums_account_for_every_fixture(merged):
+    stadiums = merged["stadiums"]
+    assert sum(s["matches_hosted"] for s in stadiums) == len(merged["matches"])
+
+    by_country = Counter(s["country"] for s in stadiums)
+    assert by_country == {"United States": 11, "Mexico": 3, "Canada": 2}
+
+    # The final was played at MetLife, and nowhere else claims it.
+    hosts_final = [s["id"] for s in stadiums if "FINAL" in s["stages"]]
+    assert hosts_final == ["new-york-new-jersey"]
+
+    for s in stadiums:
+        assert s["matches_hosted"] > 0, f"{s['id']} hosted nothing"
+        assert s["stages"], f"{s['id']} has no stages"
+        assert s["capacity"] > 0 and s["opened"] > 1900, s
 
 
 def test_validate_passes_on_merged(merged):

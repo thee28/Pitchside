@@ -126,6 +126,7 @@ cd backend
 | `GET /api/bracket` | Knockout tree |
 | `GET /api/leaders` | Top scorers, assists, awards |
 | `GET /api/matches/{id}` | Match detail (scorers, stats, lineups) |
+| `GET /api/stadiums` | Venues grouped by host country |
 | `GET /api/health` | Liveness check |
 
 <br />

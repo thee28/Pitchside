@@ -182,3 +182,30 @@ class LeadersResponse(BaseModel):
     board: list[BoardRow]
     assists: list[AssistRow]
     awards: list[AwardRow]
+
+
+class StadiumRow(BaseModel):
+    id: str
+    fifaName: str
+    localName: str
+    city: str
+    region: str
+    capacity: int
+    opened: int
+    roof: str | None
+    blurb: str | None
+    matches: int
+    stages: list[str]
+
+
+class StadiumCountry(BaseModel):
+    country: str
+    flag: str
+    stadiums: list[StadiumRow]
+    venues: int
+    matches: int
+    capacity: int
+
+
+class StadiumsResponse(BaseModel):
+    countries: list[StadiumCountry]

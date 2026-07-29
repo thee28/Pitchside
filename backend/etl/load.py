@@ -19,6 +19,7 @@ TABLES = {
     "player_match_stats": models.PlayerMatchStat,
     "awards": models.Award,
     "tournament_stats": models.TournamentStat,
+    "stadiums": models.Stadium,
 }
 
 # Natural keys used for idempotent upserts on tables with serial PKs.
@@ -30,9 +31,10 @@ CONFLICT_KEYS = {
     "player_match_stats": ["player_id", "match_order"],
     "awards": ["award"],
     "tournament_stats": ["label"],
+    "stadiums": ["id"],
 }
 
-JSONB_COLS = {"radar", "bars", "roster"}
+JSONB_COLS = {"radar", "bars", "roster", "stages"}
 
 
 def build_frames(raw: dict) -> dict[str, pd.DataFrame]:
@@ -74,6 +76,14 @@ def build_frames(raw: dict) -> dict[str, pd.DataFrame]:
     awards = pd.DataFrame(raw["awards"])
     tournament_stats = pd.DataFrame(raw["tournament_stats"])
 
+    # The legacy seed source carries the editorial venue facts only; the
+    # hosted-match columns are added by the merge, so default them here.
+    stadiums = pd.DataFrame(raw["stadiums"])
+    if "matches_hosted" not in stadiums.columns:
+        stadiums["matches_hosted"] = 0
+    if "stages" not in stadiums.columns:
+        stadiums["stages"] = None
+
     return {
         "teams": teams,
         "group_standings": standings,
@@ -82,6 +92,7 @@ def build_frames(raw: dict) -> dict[str, pd.DataFrame]:
         "player_match_stats": player_match_stats,
         "awards": awards,
         "tournament_stats": tournament_stats,
+        "stadiums": stadiums,
     }
 
 
@@ -117,6 +128,18 @@ def validate(frames: dict[str, pd.DataFrame]) -> None:
 
     stats = frames["player_match_stats"]
     _check(set(stats["player_id"]) == set(players["id"]), "form rows/players mismatch")
+
+    stadiums = frames["stadiums"]
+    _check(
+        len(stadiums) == len(set(stadiums["id"])), "duplicate stadium ids"
+    )
+    hosted = int(stadiums["matches_hosted"].sum())
+    # Zero on the legacy seed source, which has no hosted-match data at all;
+    # otherwise every fixture must be accounted for by exactly one venue.
+    _check(
+        hosted in (0, len(matches)),
+        f"stadium match load {hosted} != {len(matches)} fixtures",
+    )
 
 
 def upsert(conn, table_name: str, df: pd.DataFrame) -> None:
