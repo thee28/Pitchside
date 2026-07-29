@@ -2,6 +2,9 @@
 # Deploy: Render Dashboard -> New -> Blueprint -> pick this repo.
 # The frontend is hosted elsewhere; set CORS_ORIGINS to its URL (see below).
 databases:
+  # NOTE: a free database is deleted 30 days after creation. Bump this to a paid
+  # plan here at the same time you upgrade it in the dashboard — if the two ever
+  # disagree, a Blueprint re-sync tries to apply whatever this file says.
   - name: pitchside-db
     plan: free
     databaseName: pitchside
@@ -11,7 +14,9 @@ services:
   - type: web
     name: pitchside-api
     runtime: python
-    plan: free
+    # Starter, not free: free web services sleep after ~15 min idle and cold-start
+    # at ~50s. Must match the dashboard or a Blueprint re-sync will downgrade it.
+    plan: starter
     rootDir: backend
     # Install deps, create schema, then load the real tournament (ETL_SOURCE=api,
     # offline from the committed cache). Runs once per deploy, so no request ever
