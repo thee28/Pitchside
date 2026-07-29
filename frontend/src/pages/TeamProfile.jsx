@@ -212,7 +212,7 @@ export default function TeamProfile() {
               <div key={`${m.stage}-${m.oppCode}`} style={{ flex: "0 0 auto", minWidth: 132, background: "var(--pitch-dark)", border: "0.5px solid var(--chalk-rule)", padding: "12px 14px" }}>
                 <div className="ps-th">{m.stage}</div>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, marginTop: "var(--sp-2)" }}>
-                  <span style={{ fontSize: 16, lineHeight: 1 }}>{m.oppFlag}</span>
+                  <Flag code={m.oppFlag} size={15} />
                   <span style={{ fontSize: "var(--text-sm)", fontWeight: 500, color: "var(--goalpost)" }}>{m.oppCode}</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "var(--sp-2)", marginTop: 6 }}>
