@@ -87,7 +87,7 @@ def test_spoofed_forwarded_for_cannot_escape_the_bucket(client):
 
 
 def test_health_is_never_rate_limited(client):
-    """Render's health check and the keep-warm cron must always get through."""
+    """Render's health check must always get through."""
     ip = {"CF-Connecting-IP": "203.0.113.7"}
     for _ in range(6):
         client.get("/api/nope", headers=ip)

@@ -154,7 +154,7 @@ Set these in the respective environments before deploying:
 
 - Backend: Render Blueprint from [render.yaml](render.yaml) provisions the Postgres + web service; build runs `alembic upgrade head` then `python -m etl.load`. Set `CORS_ORIGINS` to the exact frontend origin, no trailing slash (for example `https://pitchsidedata.app`).
 - Frontend: Vercel env var `VITE_API_BASE=https://pitchside-api-x7py.onrender.com`, then redeploy.
-- Keep-warm: [.github/workflows/keepwarm.yml](.github/workflows/keepwarm.yml) pings `/api/health` every 10 min so the free web service does not cold-start. Update the URL there if the backend hostname changes.
+- The web service runs on Render's Starter plan, which does not sleep. A free service would sleep after ~15 min idle and cold-start at ~50s; that needed a cron pinging `/api/health` to stay up, so restore one if the plan is ever downgraded.
 
 ### Runbook
 
