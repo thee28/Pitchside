@@ -74,10 +74,7 @@ export default function Bracket() {
 
   return (
     <PageShell label="Knockout bracket">
-      <h1 className="ps-title">KNOCKOUT BRACKET</h1>
-      <p className="ps-subtitle" style={{ marginBottom: "var(--sp-5)" }}>
-        Every knockout result, from the Round of 32 to the final in East Rutherford on July 19. Tap any match for line-ups, ratings and stats.
-      </p>
+      <h1 className="ps-title" style={{ marginBottom: "var(--sp-5)" }}>KNOCKOUT BRACKET</h1>
       <div style={{ overflowX: "auto", paddingBottom: "var(--sp-3)" }}>
         <div style={{ display: "flex", gap: 22, minWidth: 1080 }}>
           {data.cols.map((col) => (

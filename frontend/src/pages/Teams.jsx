@@ -53,10 +53,7 @@ export default function Teams() {
 
   return (
     <PageShell label="Teams index">
-      <h1 className="ps-title">TEAMS</h1>
-      <p className="ps-subtitle" style={{ marginBottom: 22 }}>
-        Scout reports on how the contenders played.
-      </p>
+      <h1 className="ps-title" style={{ marginBottom: 22 }}>TEAMS</h1>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "var(--sp-4)" }}>
         {data.cards.map((card) => (
           <TeamCard key={card.id} card={card} />

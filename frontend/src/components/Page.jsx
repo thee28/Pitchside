@@ -6,7 +6,7 @@ export function PageShell({ children, label }) {
   );
 }
 
-// Skeleton mirrors the common page shape (title, subtitle, card band)
+// Skeleton mirrors the common page shape (title, meta line, card band)
 // so content lands without a layout jump.
 export function Loading() {
   return (

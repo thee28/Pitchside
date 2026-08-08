@@ -131,12 +131,6 @@ button {
   color: var(--chalk);
 }
 
-.ps-subtitle {
-  font-size: var(--text-md);
-  color: var(--chalk-60);
-  margin-top: 6px;
-}
-
 .ps-label {
   font-size: var(--text-xs);
   font-weight: 500;

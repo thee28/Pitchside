@@ -111,16 +111,9 @@ export default function Stadiums() {
   if (loading) return <Loading />;
   if (error) return <ErrorBox error={error} />;
 
-  const venues = data.countries.reduce((n, c) => n + c.venues, 0);
-  const matches = data.countries.reduce((n, c) => n + c.matches, 0);
-
   return (
     <PageShell label="Stadiums index">
       <h1 className="ps-title">STADIUMS</h1>
-      <p className="ps-subtitle" style={{ marginBottom: 4 }}>
-        {venues} venues across three host countries staged the {matches} matches. Names are the
-        sponsor-free ones FIFA used during the tournament.
-      </p>
       {data.countries.map((c) => (
         <CountrySection key={c.country} c={c} />
       ))}
